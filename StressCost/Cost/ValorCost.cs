@@ -57,7 +57,7 @@ namespace StressCost.Cost
 
         public override bool CostSatisfied(int cardCost, PlayableCard card)
         {
-            return cardCost <= MaxRank;
+            return cardCost < MaxRank;
         }
 
         public override string CostUnsatisfiedHint(int cardCost, PlayableCard card)

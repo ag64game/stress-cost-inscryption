@@ -17,6 +17,7 @@ using InscryptionAPI.Regions;
 using InscryptionAPI.Sound;
 using InscryptionAPI.Triggers;
 using InscryptionCommunityPatch.Card;
+using InscryptionCommunityPatch.PixelTutor;
 using Pixelplacement.TweenSystem;
 using Steamworks;
 using StressCost.Cost;
@@ -42,8 +43,8 @@ namespace StressCost
     [BepInPlugin(GUID, NAME, VERSION)]
     public class StressPlugin : BaseUnityPlugin
     {
-        public const string GUID = "aga.stress";
-        public const string NAME = "StressCost";
+        public const string GUID = "aga.costmania";
+        public const string NAME = "CostManiia";
         private const string VERSION = "0.0.6.7";
 
         public static string Directory;
@@ -62,7 +63,7 @@ namespace StressCost
             Log = base.Logger;
             Directory = base.Info.Location.Replace("StressCost.dll", "");
             harmony.PatchAll();
-            configFairHandActive = base.Config.Bind<bool>("Fair Hand", "Active", true, "Should this mod post-fix patch fair hand to include the Money, Life, and Hybrid Costs?");
+            configFairHandActive = base.Config.Bind<bool>("Fair Hand", "Active", true, "Should this mod post-fix patch fair hand to include the new costs");
             configFairHandCost = base.Config.Bind<int>("Fair Hand", "Stress Cost", 3, "The value in which the card should not show up in fair hand.");
 
             AddCost();
@@ -73,8 +74,10 @@ namespace StressCost
         private void Update()
         {
             Cost.ValorCost.SetMaxRank();
+        }
 
-
+        private void OnGUI()
+        {
             GameObject[] allCards = Array.FindAll(FindObjectsOfType<GameObject>(), obj => obj.name.Contains("Card ("));
 
             foreach (GameObject card in allCards)
@@ -100,12 +103,14 @@ namespace StressCost
 
                         if (baseVal + modVal > 0) rankText.GetComponent<PixelText>().SetText(Convert.ToString(baseVal + modVal));
                         else rankText.GetComponent<PixelText>().SetText("");
-                    } catch
+                    }
+                    catch
                     {
                         if (baseVal > 0) rankText.GetComponent<PixelText>().SetText(Convert.ToString(baseVal));
                         else rankText.GetComponent<PixelText>().SetText("");
                     }
-                    rankText.GetComponent<PixelText>().SetColor(Color.grey);
+
+                    rankText.GetComponent<PixelText>().SetColor(Color.gray);
 
                 }
                 catch
@@ -114,7 +119,7 @@ namespace StressCost
 
                     GameObject valorRank = Instantiate(attack);
                     valorRank.name = "ValorRank";
-                    valorRank.transform.position = new Vector3(attack.transform.position.x + 0.165f, attack.transform.position.y + 0.01f, attack.transform.position.z);
+                    valorRank.transform.position = new Vector3(attack.transform.position.x + 0.166f, attack.transform.position.y + 0.005f, attack.transform.position.z);
                     valorRank.transform.SetParent(statsSect.transform);
                 }
             }
@@ -191,6 +196,7 @@ namespace StressCost
             private static IEnumerator DoPromotionPhase()
             {
                 var board = Singleton<BoardManager>.Instance;
+
                 List<CardSlot> all = board.playerSlots;
                 List<CardSlot> available = all.FindAll(slot => slot.Card != null && !slot.Card.HasTrait(Trait.Terrain));
 
@@ -204,9 +210,7 @@ namespace StressCost
                 var mod = new CardModificationInfo(0, 0);
                 mod.SetExtendedProperty("ValorRank", 1);
 
-
                 slot.Card.AddTemporaryMod(mod);
-                Console.WriteLine(slot.Card.temporaryMods);
             }
 
             private static void PromotionFailed(CardSlot slot)
@@ -214,6 +218,7 @@ namespace StressCost
                 if (slot.Card != null && slot.Card.Info.HasTrait(Trait.Terrain))
                 {
                     slot.Card.Anim.StrongNegationEffect();
+                    slot.PlaySound();
                 }
             }
 
@@ -323,17 +328,17 @@ namespace StressCost
         {
             public static void Postfix(ref CollectionUI __instance)
             {
-                AddTab(__instance, "Stress");
+                AddTab(__instance, "Stress", new Vector3(-0.718f, 0.175f, 0));
                 //AddTab(__instance, "Alchemy");
-                //AddTab(__instance, "Valor");
+                AddTab(__instance, "Valor", new Vector3(-0.242f, 0.175f, 0));
             }
-            public static void AddTab(CollectionUI instance, string name)
+            public static void AddTab(CollectionUI instance, string name, Vector3 position)
             {
                 GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(instance.gameObject.transform.Find("MainPanel").Find("Tabs").Find("Tab_4").gameObject);
                 gameObject.name = $"Tab_{name}";
 
                 gameObject.transform.parent = instance.gameObject.transform.Find("MainPanel").Find("Tabs");
-                gameObject.transform.localPosition = new Vector3(-0.718f, 0.175f, 0);
+                gameObject.transform.localPosition = position;
 
                 instance.tabButtons.Add(gameObject.GetComponent<GenericUIButton>());
                 gameObject.GetComponent<GenericUIButton>().inputKey = KeyCode.Alpha5;
@@ -347,14 +352,16 @@ namespace StressCost
 
         [HarmonyPatch(typeof(CollectionUI), "CreatePages")]
         [HarmonyPostfix]
-        public static void SortStressCards(ref CollectionUI __instance, ref List<List<CardInfo>> __result, ref List<CardInfo> cards)
+        public static void SortCards(ref CollectionUI __instance, ref List<List<CardInfo>> __result, ref List<CardInfo> cards)
         {
             //Take the amount of buttons for array
             int[] pageTrackers;
             if(!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("mrfantastik.inscryption.infact2")) 
-                pageTrackers = new int[__instance.gameObject.transform.Find("MainPanel").childCount];
+                pageTrackers = new int[6];
             else
-                pageTrackers = new int[__instance.gameObject.transform.Find("MainPanel").childCount + 1];
+                pageTrackers = new int[7];
+
+            Console.WriteLine(pageTrackers.Length);
 
             List<List<CardInfo>> res = new List<List<CardInfo>>();
             int index = 0;
@@ -362,7 +369,7 @@ namespace StressCost
             foreach (CardTemple temple in Enum.GetValues(typeof(CardTemple))) if (temple != CardTemple.NUM_TEMPLES)
             {
                 //Get all the cards of the temple who aren't Stress cards. Inject them to __results
-                List<CardInfo> list = cards.FindAll(info => info.temple == temple && (info.GetModPrefix() == null || !info.GetModPrefix().Contains("Stress")));
+                List<CardInfo> list = cards.FindAll(info => info.temple == temple && (info.GetModPrefix() == null || (!info.GetModPrefix().Contains("Stress") && !info.GetModPrefix().Contains("Valor"))));
                 InjectToPixelMenu(ref res, list);
 
                 pageTrackers[(int)temple] = index;
@@ -386,7 +393,19 @@ namespace StressCost
                 .ToList();
 
             InjectToPixelMenu(ref res, stressCards);
+            pageTrackers[pageTrackers.Length - 2] = index;
+            if (stressCards.Count != 0) index += Convert.ToInt32(Mathf.Ceil(stressCards.Count / 8f)); else index++;
+
+            //Injects Stress cards
+            List<CardInfo> valorCards = cards.FindAll(info => info.GetModPrefix() != null && info.GetModPrefix().Contains("Valor"));
+            valorCards = valorCards.OrderBy(info => (info.metaCategories.Contains(CardMetaCategory.Rare) ? 1 : 100))
+                .ThenBy(info => (info.GetExtendedPropertyAsInt("ValorCost")))
+                .ThenBy(info => (info.DisplayedNameEnglish))
+                .ToList();
+
+            InjectToPixelMenu(ref res, valorCards);
             pageTrackers[pageTrackers.Length - 1] = index;
+            if (valorCards.Count != 0) index += Convert.ToInt32(Mathf.Ceil(valorCards.Count / 8f)); else index++;
 
             //Injects all variables proper. Dynamic injection would cause NullPointerExceptions
             __result = res;
