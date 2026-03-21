@@ -41,12 +41,17 @@ namespace StressCost.Cost
             try
             {
                 CardSlot maxCard = board.playerSlots.FindAll(slot => slot.Card != null)
-                    .OrderByDescending(slot => slot.Card.Info.GetExtendedPropertyAsInt("ValorRank"))
+                    .OrderByDescending(slot => slot.Card.Info.GetExtendedPropertyAsInt("ValorRank") + slot.Card.TemporaryMods.Sum(mod => mod.GetExtendedPropertyAsInt("ValorRank")))
                     .First();
-                int? max = maxCard.Card.Info.GetExtendedPropertyAsInt("ValorRank");
+                int? sumMods = 0;
 
-                if (max != null) MaxRank = max;
-                else MaxRank = 0;
+                int? maxBase = maxCard.Card.Info.GetExtendedPropertyAsInt("ValorRank");
+                if (maxBase == null) maxBase = 0;
+
+                int? maxMods = maxCard.Card.TemporaryMods.Sum(mod => mod.GetExtendedPropertyAsInt("ValorRank"));
+                if (maxMods == null) maxMods = 0;
+
+                MaxRank = maxBase + maxMods;
             } catch { MaxRank = 0; }
         }
 
