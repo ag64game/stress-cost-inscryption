@@ -27,7 +27,7 @@ namespace StressCost.Sigils
             base.Card.Anim.PlayAttackAnimation(false, opponent);
             yield return new WaitForSeconds(0.175f);
 
-            if (opponent.Card != null) yield return opponent.Card.TakeDamage(base.Card.Attack, base.Card);
+            if (opponent.Card != null && !opponent.Card.FaceDown) yield return opponent.Card.TakeDamage(base.Card.Attack, base.Card);
             else
             {
                 yield return new WaitForSeconds(0.175f);

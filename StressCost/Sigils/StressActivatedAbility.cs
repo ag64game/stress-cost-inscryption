@@ -49,6 +49,54 @@ namespace StressCost.Sigils
             }
         }
 
+        public virtual int ValorCost
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public virtual int ValorRankCost
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public virtual int StardustCost
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public virtual int FleshCost
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public virtual int MetalCost
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public virtual int ElixirCost
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
         public override IEnumerator Activate()
         {
             yield return true;
