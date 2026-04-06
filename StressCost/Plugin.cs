@@ -84,8 +84,8 @@ namespace StressCost
             harmony.PatchAll(typeof(CostmaniaPlugin));
 
             SetupStarterDecks();
-            
         }
+
         private void Update()
         {
             Cost.ValorCost.SetMaxRank();
@@ -324,6 +324,8 @@ namespace StressCost
                 slot.Card.AddTemporaryMod(mod);
 
                 UpdateValorRank(slot.Card.gameObject);
+
+                Cost.ValorCost.SetMaxRank();
             }
 
             private static void PromotionFailed(CardSlot slot)
@@ -339,6 +341,13 @@ namespace StressCost
             {
 
             }
+        }
+
+        [HarmonyPostfix, HarmonyPatch(typeof(PlayableCard), nameof(PlayableCard.DestroyWhenStackIsClear))]
+        public static IEnumerator ResetMaxValor(IEnumerator enumerator, PlayableCard __instance)
+        {
+            Cost.ValorCost.SetMaxRank();
+            yield return enumerator;
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(TurnManager), nameof(TurnManager.DoUpkeepPhase))]
@@ -731,6 +740,7 @@ namespace StressCost
 
         public static IEnumerator OnStressCounterChange(PlayableCard card, IEnumerator enumerator)
         {
+            Console.WriteLine(card == null);
             if (card.LacksAllAbilities()) yield return enumerator;
 
             if (card.HasAbility(AbilFearmonger.ability))
@@ -750,7 +760,8 @@ namespace StressCost
 
             Console.WriteLine(enumerator == null);
            
-            yield return enumerator;
+            try { yield return enumerator; } finally { }
+            yield break;
         }
 
         [HarmonyPatch(typeof(PlayableCard), nameof(PlayableCard.Die))]
@@ -758,6 +769,7 @@ namespace StressCost
         public static IEnumerator ThanatoKillCount(IEnumerator enumerator, PlayableCard __instance, bool wasSacrifice)
         {
             if (__instance.OpponentCard) VariablestatDeathToll.killCount++;
+            
             yield return enumerator;
         }
         

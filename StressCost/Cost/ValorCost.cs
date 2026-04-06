@@ -42,32 +42,28 @@ namespace StressCost.Cost
             {
                 List<CardSlot> validSlots = board.playerSlots.FindAll(slot => slot.Card != null && slot.IsPlayerSlot);
                 CardSlot maxCard = validSlots[0];
+                int? max = 0;
 
                 foreach (CardSlot slot in validSlots)
                 {
-                    int? slotVal = slot.Card.Info.GetExtendedPropertyAsInt("ValorRank");
-                    if (slotVal == null) slotVal = 0;
+                    int? curStand = slot.Card.Info.GetExtendedPropertyAsInt("ValorRank");
+                    if (curStand == null) curStand = 0;
 
-                    int? slotMod = slot.Card.TemporaryMods.Sum(mod => mod.GetExtendedPropertyAsInt("ValorRank"));
-                    if (slotMod == null) slotMod = 0;
+                    int? curMod = slot.Card.TemporaryMods.Sum(mod => mod.GetExtendedPropertyAsInt("ValorRank"));
+                    if (curMod == null) curMod = 0;
 
-                    int? maxVal = maxCard.Card.Info.GetExtendedPropertyAsInt("ValorRank");
-                    if (maxVal == null) maxVal = 0;
+                    int cur = curStand.Value + curMod.Value;
 
-                    int? maxMod = maxCard.Card.TemporaryMods.Sum(mod => mod.GetExtendedPropertyAsInt("ValorRank"));
-                    if (maxMod == null) maxMod = 0;
-
-                    if (slotVal + slotMod > maxVal + maxMod)
+                    if (cur > max)
+                    {
                         maxCard = slot;
+                        max = cur;
+                    }
+                        
+                        
                 }
 
-                int? maxBase = maxCard.Card.Info.GetExtendedPropertyAsInt("ValorRank");
-                if (maxBase == null) maxBase = 0;
-
-                int? maxMods = maxCard.Card.TemporaryMods.Sum(mod => mod.GetExtendedPropertyAsInt("ValorRank"));
-                if (maxMods == null) maxMods = 0;
-
-                MaxRank = maxBase + maxMods;
+                MaxRank = max;
             }
             catch { MaxRank = 0; }
         }

@@ -189,9 +189,8 @@ namespace StressCost.Cost
 
         private void DepleteDies(AlchemyValue toDrop, int amount)
         {
-            for (int i = 0; i < 10 && dies[i].value != AlchemyValue.Empty && amount > 0; i++)
-            {
-                Console.WriteLine(i);
+            for (int i = 0; i < 10 && amount > 0; i++)
+            {  
                 if (dies[i].value == toDrop && amount > 0)
                 {
                     dies[i].value = AlchemyValue.Empty;
@@ -202,9 +201,11 @@ namespace StressCost.Cost
                         dies[j + 1].value = AlchemyValue.Empty;
                     }
                     amount--;
+                    i--;
                 }
-
             }
+
+            //if (amount > 0) dies[j].value = AlchemyValue.Empty;
         }
     }
 

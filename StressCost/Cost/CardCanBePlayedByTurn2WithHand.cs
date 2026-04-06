@@ -31,7 +31,7 @@ namespace StressCost.Cost
     {
         public static bool CanBePlayed(int amount, CardInfo card, List<CardInfo> hand)
         {
-            return amount <= 1;
+            return amount <= 1 && card.GetExtendedPropertyAsInt("MetalCost") < 2 && card.GetExtendedPropertyAsInt("ElixirCost") < 2;
         }
     }
 
@@ -39,7 +39,7 @@ namespace StressCost.Cost
     {
         public static bool CanBePlayed(int amount, CardInfo card, List<CardInfo> hand)
         {
-            return amount <= 1;
+            return amount <= 1 && card.GetExtendedPropertyAsInt("FleshCost") < 2 && card.GetExtendedPropertyAsInt("ElixirCost") < 2;
         }
     }
 
@@ -47,7 +47,7 @@ namespace StressCost.Cost
     {
         public static bool CanBePlayed(int amount, CardInfo card, List<CardInfo> hand)
         {
-            return amount <= 1;
+            return amount <= 1 && card.GetExtendedPropertyAsInt("MetalCost") < 2 && card.GetExtendedPropertyAsInt("FleshCost") < 2;
         }
     }
 
