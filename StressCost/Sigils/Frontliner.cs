@@ -27,6 +27,8 @@ namespace StressCost.Sigils
 
             base.Card.AddTemporaryMod(mod);
 
+            CostmaniaPlugin.UpdateValorRank(Card.gameObject);
+
             yield return new WaitForSeconds(0.2f);
             yield return LearnAbility(0.2f);
         }

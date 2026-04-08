@@ -19,7 +19,7 @@ namespace StressCost.Sigils
             AbilityInfo info = AbilityManager.New("StressSigils",
                 "Fearmonger",
                 "[creature] strikes the opposing card every time the Stress Counter goes up.",
-                typeof(AbilIronclad),
+                typeof(AbilFearmonger),
                 "StressCards/StressCost/StressCost/Resources/Sigils/3d_fearmonger.png");
 
             info.SetPixelAbilityIcon(TextureHelper.GetImageAsTexture($"pixel_fearmonger.png", typeof(CostmaniaPlugin).Assembly));

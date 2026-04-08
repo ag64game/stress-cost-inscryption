@@ -39,28 +39,68 @@ namespace StressCost.Cost
         private SpriteRenderer renderer;
         public static int texWidth = 0, texHeight = 0;
 
-        public Vector3 pivot = new Vector3(0f, 0f, 0.1f);
+        public Vector3 pivot = new Vector3(0.38f, 0.35f, 0f);
+
+        private static Sprite fleshSprite = null, metalSprite = null, elixirSprite = null, emptySprite = null;
+
+        
 
         private void Awake()
         {
             renderer = gameObject.GetComponent<SpriteRenderer>();
             //gameObject.AddComponent<CardAnimationController>();
-        }
 
-        private void Update()
-        {
-            Texture2D texture = TextureHelper.GetImageAsTexture($"displaycost_{value.ToString().ToLower()}_alchemy_die.png", typeof(CostmaniaPlugin).Assembly);
-            texWidth = texture.width;
-            texHeight = texture.height;
-
-            renderer.sprite = Sprite.Create(
+            Texture2D texture = TextureHelper.GetImageAsTexture($"displaycost_flesh_alchemy_die.png", typeof(CostmaniaPlugin).Assembly);
+            fleshSprite = Sprite.Create(
                     texture,
                     new Rect(0, 0, texWidth, texHeight),
                     pivot
                     );
-            renderer.sprite.name = "dice_sprite";
+            fleshSprite.name = "flesh_sprite";
 
-            if (value == AlchemyValue.Empty) locked = false;
+            metalSprite = Sprite.Create(
+                    TextureHelper.GetImageAsTexture($"displaycost_metal_alchemy_die.png", typeof(CostmaniaPlugin).Assembly),
+                    new Rect(0, 0, texWidth, texHeight),
+                    pivot
+                    );
+            metalSprite.name = "metal_sprite";
+
+            elixirSprite = Sprite.Create(
+                    TextureHelper.GetImageAsTexture($"displaycost_elixir_alchemy_die.png", typeof(CostmaniaPlugin).Assembly),
+                    new Rect(0, 0, texWidth, texHeight),
+                    pivot
+                    );
+            elixirSprite.name = "elixir_sprite";
+
+            emptySprite = Sprite.Create(
+                    TextureHelper.GetImageAsTexture($"displaycost_empty_alchemy_die.png", typeof(CostmaniaPlugin).Assembly),
+                    new Rect(0, 0, texWidth, texHeight),
+                    pivot
+                    );
+            emptySprite.name = "empty_sprite";
+
+            texWidth = texture.width;
+            texHeight = texture.height;
+        }
+
+        private void Update()
+        {
+            switch (value)
+            {
+                case (AlchemyValue.Flesh):
+                    renderer.sprite = fleshSprite;
+                    break;
+                case (AlchemyValue.Metal):
+                    renderer.sprite = metalSprite;
+                    break;
+                case (AlchemyValue.Elixir):
+                    renderer.sprite = elixirSprite;
+                    break;
+                default:
+                    renderer.sprite = emptySprite;
+                    locked = false;
+                    break;
+            }
 
             float lockedColor = 0.5f * (locked ? 1 : 2);
             renderer.color = new Color(lockedColor, lockedColor, lockedColor);
@@ -121,7 +161,6 @@ namespace StressCost.Cost
                 dieObj.transform.position = position;
 
                 dies[i] = dieObj.AddComponent<AlchemyDice>();
-                dies[i].pivot = new Vector3(0.36f, 0.35f, 0f);
                 dies[i].gameObject.transform.SetParent(transform, false);
 
 

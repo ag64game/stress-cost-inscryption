@@ -72,6 +72,13 @@ namespace StressCost
         private static bool introStarted = false;
         private static List<PickupCardPileVolume> stones;
 
+        public static bool dontPay = false;
+
+        internal static ConfigEntry<bool> config3DAlchemy;
+        internal static ConfigEntry<bool> config3DStress;
+        internal static ConfigEntry<bool> config3DStardust;
+        internal static ConfigEntry<bool> config3DValor;
+
         private void Awake()
         {
             Log = base.Logger;
@@ -84,19 +91,24 @@ namespace StressCost
             harmony.PatchAll(typeof(CostmaniaPlugin));
 
             SetupStarterDecks();
+
+            config3DAlchemy = base.Config.Bind<bool>("Alchemy in 3D", "Active", false, "Whether Alchemy dies should be rolled in the 3D acts, won't display them though");
+            config3DStress = base.Config.Bind<bool>("Stress in 3D", "Active", false, "Whether the Stress Counter should be active in the 3D acts, won't display it though");
+            config3DStardust = base.Config.Bind<bool>("Stardust in 3D", "Active", false, "Whether the Stardust Counter should be active in the 3D acts, won't display it though");
+            config3DValor = base.Config.Bind<bool>("Valor in 3D", "Active", false, "Whether to do the Promotion Phase or not in the 3D acts, though it won't display the Max Valor Counter");
         }
 
         private void Update()
         {
             Cost.ValorCost.SetMaxRank();
-        }
 
-        private void OnGUI()
-        {
-            try { foreach (GameObject card in Array.FindAll(FindObjectsOfType<GameObject>(), obj => obj.name.Contains("Card ("))) UpdateValorRank(card); } catch { }
+            if (Singleton<CollectionUI>.Instance != null)
+            {
+                try { foreach (PixelSelectableCard card in Singleton<CollectionUI>.Instance.pageCards) UpdateValorRank(card.gameObject); } catch { }
+            }
 
 
-            if (openPack)
+            if (openPack && SaveManager.SaveFile.IsPart2)
             {
                 AddCustomTemples();
                 GeneratePack();
@@ -160,31 +172,38 @@ namespace StressCost
             return ret;
         }
 
-        private static void UpdateValorRank(GameObject card)
+        public static void UpdateValorRank(GameObject card)
         {
-            GameObject statsSect = card.FindChild("Base").FindChild("PixelSnap").FindChild("CardElements").FindChild("PixelCardStats");
-            GameObject rankText = statsSect.FindChild("ValorRank");
-            CardInfo info;
-
-            try { info = card.GetComponent<PixelSelectableCard>().Info; }
-            catch { info = card.GetComponent<PixelPlayableCard>().Info; }
-
-            int? baseVal = info.GetExtendedPropertyAsInt("ValorRank");
-            if (baseVal == null) baseVal = 0;
-
-            PixelText statText = rankText.GetComponent<PixelText>();
-            try
+            if (config3DValor.Value || SaveManager.SaveFile.IsPart2)
             {
-                int? modVal = info.GetPlayableCard().temporaryMods.Sum(mod => mod.GetExtendedPropertyAsInt("ValorRank"));
-                if (modVal == null) modVal = 0;
+                GameObject statsSect = card.FindChild("Base").FindChild("PixelSnap").FindChild("CardElements").FindChild("PixelCardStats");
+                GameObject rankText = statsSect.FindChild("ValorRank");
+                CardInfo info;
 
-                if (baseVal + modVal > 0) statText.SetText(Convert.ToString(baseVal + modVal));
-                else statText.SetText("");
-            }
-            catch
-            {
-                if (baseVal > 0) statText.SetText(Convert.ToString(baseVal));
-                else statText.SetText("");
+                try { info = card.GetComponent<PixelSelectableCard>().Info; }
+                catch { try { info = card.GetComponent<PixelPlayableCard>().Info; }
+                    catch { try { info = card.GetComponent<SelectableCard>().Info; }
+                        catch { info = card.GetComponent<PlayableCard>().Info; }
+                    }
+                }
+
+                int? baseVal = info.GetExtendedPropertyAsInt("ValorRank");
+                if (baseVal == null) baseVal = 0;
+
+                PixelText statText = rankText.GetComponent<PixelText>();
+                try
+                {
+                    int? modVal = info.GetPlayableCard().temporaryMods.Sum(mod => mod.GetExtendedPropertyAsInt("ValorRank"));
+                    if (modVal == null) modVal = 0;
+
+                    if (baseVal + modVal > 0) statText.SetText(Convert.ToString(baseVal + modVal));
+                    else statText.SetText("");
+                }
+                catch
+                {
+                    if (baseVal > 0) statText.SetText(Convert.ToString(baseVal));
+                    else statText.SetText("");
+                }
             }
         }
 
@@ -249,23 +268,30 @@ namespace StressCost
             VariablestatDeathToll.AddDeathToll();
         }
 
+
         [HarmonyPatch(typeof(BoardManager), nameof(BoardManager.ResolveCardOnBoard))]
         [HarmonyPostfix]
         public static IEnumerator PayCosts(IEnumerator enumerator, BoardManager __instance, PlayableCard card, CardSlot slot)
         {
             if (slot.IsPlayerSlot)
             {
-                if (card.Info.GetExtendedPropertyAsInt("StressCost") > 0)
+                if (!dontPay)
                 {
-                    Cost.StressCost.stressCounter += card.Info.GetExtendedPropertyAsInt("StressCost").Value;
-                    foreach (CardSlot fearSlot in __instance.AllSlots.FindAll(slot => slot.Card != null && slot.Card.Info.abilities.Count != 0)) yield return OnStressCounterChange(fearSlot.Card, enumerator);
+                    if (card.Info.GetExtendedPropertyAsInt("StressCost") > 0 && (config3DStress.Value || SaveManager.SaveFile.IsPart2))
+                    {
+                        Cost.StressCost.stressCounter += card.Info.GetExtendedPropertyAsInt("StressCost").Value;
+                        foreach (CardSlot fearSlot in __instance.AllSlots.FindAll(slot => slot.Card != null && slot.Card.Info.abilities.Count != 0)) yield return OnStressCounterChange(fearSlot.Card, enumerator);
+                    }
+
+                    if (config3DAlchemy.Value || SaveManager.SaveFile.IsPart2)
+                    {
+                        if (card.Info.GetExtendedPropertyAsInt("FleshCost") > 0) disAlchemyCounter.PayIfPossible(AlchemyValue.Flesh, card.Info.GetExtendedPropertyAsInt("FleshCost").Value);
+                        if (card.Info.GetExtendedPropertyAsInt("MetalCost") > 0) disAlchemyCounter.PayIfPossible(AlchemyValue.Metal, card.Info.GetExtendedPropertyAsInt("MetalCost").Value);
+                        if (card.Info.GetExtendedPropertyAsInt("ElixirCost") > 0) disAlchemyCounter.PayIfPossible(AlchemyValue.Elixir, card.Info.GetExtendedPropertyAsInt("ElixirCost").Value);
+                    }
                 }
 
-                if (card.Info.GetExtendedPropertyAsInt("FleshCost") > 0) disAlchemyCounter.PayIfPossible(AlchemyValue.Flesh, card.Info.GetExtendedPropertyAsInt("FleshCost").Value);
-                if (card.Info.GetExtendedPropertyAsInt("MetalCost") > 0) disAlchemyCounter.PayIfPossible(AlchemyValue.Metal, card.Info.GetExtendedPropertyAsInt("MetalCost").Value);
-                if (card.Info.GetExtendedPropertyAsInt("ElixirCost") > 0) disAlchemyCounter.PayIfPossible(AlchemyValue.Elixir, card.Info.GetExtendedPropertyAsInt("ElixirCost").Value);
-
-                StardustCost.stardustCounter++;
+                if (config3DStardust.Value || SaveManager.SaveFile.IsPart2) StardustCost.stardustCounter++;
             }
 
             yield return enumerator;
@@ -275,23 +301,27 @@ namespace StressCost
         [HarmonyPostfix]
         public static IEnumerator ApplyStress(IEnumerator enumerator, TurnManager __instance, bool playerIsAttacker)
         {
-            try
+            if (config3DStress.Value || SaveManager.SaveFile.IsPart2)
             {
-                if (Cost.StressCost.stressCounter > 0)
+                try
                 {
-                    if (playerIsAttacker)
+                    if (Cost.StressCost.stressCounter > 0)
                     {
-                        int damage = Convert.ToInt32(Mathf.Floor(Cost.StressCost.stressCounter / 2f));
+                        if (playerIsAttacker)
+                        {
+                            int damage = Convert.ToInt32(Mathf.Floor(Cost.StressCost.stressCounter / 2f));
 
-                        if (damage > 0) yield return Singleton<LifeManager>.Instance.ShowDamageSequence(damage, damage, true, 0.3f, null, 0.15f, true);
+                            if (damage > 0) yield return Singleton<LifeManager>.Instance.ShowDamageSequence(damage, damage, true, 0.3f, null, 0.15f, true);
 
-                        if (Cost.StressCost.stressCounter < 2) Cost.StressCost.stressCounter = 0; else Cost.StressCost.stressCounter -= 2;
+                            if (Cost.StressCost.stressCounter < 2) Cost.StressCost.stressCounter = 0; else Cost.StressCost.stressCounter -= 2;
+                        }
+
+                        if (Singleton<LifeManager>.Instance.PlayerDamage - Singleton<LifeManager>.Instance.OpponentDamage < 5) yield return enumerator; else yield break;
                     }
-
-                    if (Singleton<LifeManager>.Instance.PlayerDamage - Singleton<LifeManager>.Instance.OpponentDamage < 5) yield return enumerator; else yield break;
+                    else yield return enumerator;
                 }
-                else yield return enumerator;
-            } finally { }
+                finally { }
+            }
             yield return enumerator;
         }
 
@@ -300,7 +330,7 @@ namespace StressCost
         {
             public static IEnumerator Postfix(IEnumerator enumerator, TurnManager __instance, bool playerUpkeep)
             {
-                if (playerUpkeep && __instance.TurnNumber > 1) yield return DoPromotionPhase();
+                if (playerUpkeep && __instance.TurnNumber > 1 && (config3DValor.Value || SaveManager.SaveFile.IsPart2)) yield return DoPromotionPhase();
                 yield return enumerator;
             }
 
@@ -346,14 +376,14 @@ namespace StressCost
         [HarmonyPostfix, HarmonyPatch(typeof(PlayableCard), nameof(PlayableCard.DestroyWhenStackIsClear))]
         public static IEnumerator ResetMaxValor(IEnumerator enumerator, PlayableCard __instance)
         {
-            Cost.ValorCost.SetMaxRank();
+            if (SaveManager.SaveFile.IsPart2) Cost.ValorCost.SetMaxRank();
             yield return enumerator;
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(TurnManager), nameof(TurnManager.DoUpkeepPhase))]
         public static IEnumerator IncrementAlchemy(IEnumerator enumerator, TurnManager __instance, bool playerUpkeep)
         {
-            if (playerUpkeep)
+            if (playerUpkeep && SaveManager.SaveFile.IsPart2)
             {
                 disAlchemyCounter.AddDies();
 
@@ -391,44 +421,51 @@ namespace StressCost
         [HarmonyPostfix, HarmonyPatch(typeof(Card), nameof(Card.RenderCard))]
         public static void RenderValorRank(Card __instance)
         {
-            GameObject statsSect = __instance.gameObject.FindChild("Base").FindChild("PixelSnap").FindChild("CardElements").FindChild("PixelCardStats");
-            GameObject rankText = statsSect.FindChild("ValorRank");
-            CardInfo info;
-
-            try { info = __instance.gameObject.GetComponent<PixelSelectableCard>().Info; }
-            catch { info = __instance.gameObject.GetComponent<PixelPlayableCard>().Info; }
-
-            int? baseVal = info.GetExtendedPropertyAsInt("ValorRank");
-            if (baseVal == null) baseVal = 0;
-
-            if (rankText == null)
+            if (config3DValor.Value || SaveManager.SaveFile.IsPart2)
             {
-                GameObject attack = statsSect.FindChild("Attack");
-                rankText = Instantiate(attack);
-                rankText.name = "ValorRank";
-                rankText.transform.position = new Vector3(attack.transform.position.x + 0.166f, attack.transform.position.y + 0.005f, attack.transform.position.z);
-                rankText.transform.SetParent(statsSect.transform);
+                GameObject statsSect = __instance.gameObject.FindChild("Base").FindChild("PixelSnap").FindChild("CardElements").FindChild("PixelCardStats");
+                GameObject rankText = statsSect.FindChild("ValorRank");
+                CardInfo info;
 
-                PixelText stat = rankText.GetComponent<PixelText>();
-                stat.SetColor(Color.gray);
+                try { info = __instance.gameObject.GetComponent<PixelSelectableCard>().Info; }
+                catch { info = __instance.gameObject.GetComponent<PixelPlayableCard>().Info; }
 
-                if (baseVal > 0) stat.SetText(Convert.ToString(baseVal));
-                else stat.SetText("");
+                int? baseVal = info.GetExtendedPropertyAsInt("ValorRank");
+                if (baseVal == null) baseVal = 0;
+
+                if (rankText == null)
+                {
+                    GameObject attack = statsSect.FindChild("Attack");
+                    rankText = Instantiate(attack);
+                    rankText.name = "ValorRank";
+                    rankText.transform.position = new Vector3(attack.transform.position.x + 0.166f, attack.transform.position.y + 0.005f, attack.transform.position.z);
+                    rankText.transform.SetParent(statsSect.transform);
+
+                    PixelText stat = rankText.GetComponent<PixelText>();
+                    stat.SetColor(Color.gray);
+
+                    if (baseVal > 0) stat.SetText(Convert.ToString(baseVal));
+                    else stat.SetText("");
+                }
             }
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(TurnManager), nameof(TurnManager.SetupPhase))]
         public static IEnumerator SetupCosts(IEnumerator enumerator, TurnManager __instance, EncounterData encounterData)
         {
-            Cost.StressCost.stressCounter = 0;
+            if (config3DStress.Value || SaveManager.SaveFile.IsPart2) Cost.StressCost.stressCounter = 0;
             VariablestatDeathToll.killCount = 0;
-            try
+            if (SaveManager.SaveFile.IsPart2)
             {
-                RenderStressCounter();
-                RenderValorCounter();
-                RenderStardustCounter();
-                RenderAlchemyCollection();
-            } catch { }
+                try
+                {
+                    RenderStressCounter();
+                    RenderValorCounter();
+                    RenderStardustCounter();
+                    RenderAlchemyCollection();
+                }
+                catch { }
+            }
 
             return enumerator;
         }
@@ -545,7 +582,7 @@ namespace StressCost
         [HarmonyPostfix]
         public static void AddRareDecals(Card __instance)
         {
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("nevernamed.no_rare.decals"))
+            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("nevernamed.inscryption.noraredecals"))
             {
                 try
                 {
@@ -714,6 +751,10 @@ namespace StressCost
             else __result.Add(new List<CardInfo>());
         }
 
+
+
+
+
         [HarmonyPatch(typeof(ActivatedAbilityBehaviour), nameof(ActivatedAbilityBehaviour.OnActivatedAbility))]
         [HarmonyPostfix]
         public static IEnumerator ActivatedAddStress(IEnumerator enumerator, ActivatedAbilityBehaviour __instance)
@@ -729,12 +770,17 @@ namespace StressCost
 
         [HarmonyPatch(typeof(PlayableCard), nameof(PlayableCard.TakeDamage))]
         [HarmonyPrefix]
-        public static void SetupDefenceAbilities(ref PlayableCard __instance, ref int damage, ref PlayableCard attacker) 
-        { 
-            if (__instance.HasAbility(AbilIronclad.ability) && damage > 0)
+        public static void SetupDefenceAbilities(out int __state, PlayableCard __instance, ref int damage, PlayableCard attacker) 
+        {
+            __state = damage;
+            if (__instance)
             {
-                damage--;
-                __instance.Anim.StrongNegationEffect();
+                if (__instance.HasAbility((Ability)5121) && damage > 0)
+                {
+                    __state--;
+                    damage--;
+                    __instance.Anim.StrongNegationEffect();
+                }
             }
         }
 
@@ -772,7 +818,22 @@ namespace StressCost
             
             yield return enumerator;
         }
-        
+
+        [HarmonyPatch(typeof(AbilityBehaviour), nameof(AbilityBehaviour.PreSuccessfulTriggerSequence))]
+        [HarmonyPrefix]
+        public static void MakeAbilNotPay(AbilityBehaviour __instance)
+        {
+            dontPay = true;
+        }
+
+        [HarmonyPatch(typeof(AbilityBehaviour), nameof(AbilityBehaviour.LearnAbility))]
+        [HarmonyPrefix]
+        public static void EndAbilPay(AbilityBehaviour __instance)
+        {
+            dontPay = false;
+        }
+
+
         [HarmonyPatch(typeof(PackOpeningUI), nameof(PackOpeningUI.OpenPack))]
         [HarmonyPostfix]
         public static IEnumerator SetPackImage(IEnumerator enumerator, PackOpeningUI __instance, CardTemple packType)
