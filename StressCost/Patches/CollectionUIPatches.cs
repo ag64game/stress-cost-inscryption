@@ -186,10 +186,12 @@ namespace StressCost.Patches
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("mrfantastik.inscryption.infact2"))
             {
-                res.Add(new List<CardInfo>());
+                //List<CardInfo> boons = cards.FindAll(info => info.metaCategories.Contains(infact2.Plugin.BoonsPool));
+                List<CardInfo> boons = new List<CardInfo>();
+                InjectToPixelMenu(ref res, boons);
 
                 pageTrackers[8] = index;
-                index++;
+                if (boons.Count != 0) index += Convert.ToInt32(Mathf.Ceil(boons.Count / 8f)); else index++;
             }
 
             //Injects all variables proper. Dynamic injection would cause NullPointerExceptions

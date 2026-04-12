@@ -53,6 +53,8 @@ namespace StressCost.Patches
 
         private static bool introStarted = false;
         private static List<PickupCardPileVolume> stones;
+
+        private static bool addedToDeck = false;
         public static void Update()
         {
             if (openPack && SaveManager.SaveFile.IsPart2)
@@ -88,6 +90,12 @@ namespace StressCost.Patches
                 }
             }
             catch { }
+
+            if (!addedToDeck && BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("mrfantastik.inscryption.infact2"))
+            {
+                SetupSideDeckCards();
+                addedToDeck = true;
+            }
         }
 
         public static void SetupStarterDecks()
@@ -110,6 +118,14 @@ namespace StressCost.Patches
                 "Valor_Flagbearer", "Valor_Flagbearer", "Valor_Flagbearer", "Valor_Longbowman", "Valor_Longbowman", "Valor_Longbowman", "Valor_Longbowman", "Valor_CorsairPirate", "Valor_CorsairPirate",
                 "Valor_Commandant", "Valor_Commandant", "Valor_Flagbearer"};
             GBC.StarterDecks.WIZARD_STARTER.AddRange(valorDeck);
+        }
+        public static void SetupSideDeckCards()
+        {
+            string[] sideDecks = { "Alchemy_Pylon", "Alchemy_Pylon", "Stress_Pills", "Stress_Pills", "Space_Telescope", "Space_Telescope", "Valor_WarBanner", "Valor_WarBanner" };
+            GBC.StarterDecks.NATURE_STARTER.AddRange(sideDecks);
+            GBC.StarterDecks.UNDEAD_STARTER.AddRange(sideDecks);
+            GBC.StarterDecks.TECH_STARTER.AddRange(sideDecks);
+            GBC.StarterDecks.WIZARD_STARTER.AddRange(sideDecks);
         }
 
         private static List<CardInfo> ArrayToInfos(string[] names)
