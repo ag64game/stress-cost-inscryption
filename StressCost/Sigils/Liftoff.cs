@@ -42,7 +42,7 @@ namespace StressCost.Sigils
             }
 
 
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} granted their friends the power of flight!", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} granted their friends the power of flight!", (GBC.TextBox.Style)Card.Info.temple);
 
             yield return LearnAbility(0.2f);
         }

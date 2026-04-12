@@ -216,6 +216,13 @@ namespace StressCost.Patches
             dontPay = false;
         }
 
+        [HarmonyPatch(typeof(PlayableCard), nameof(PlayableCard.Die))]
+        [HarmonyPrefix]
+        public static void AbilDiePlay(PlayableCard __instance, bool wasSacrifice)
+        {
+            dontPay = false;
+        }
+
 
         [HarmonyPatch(typeof(TurnManager), nameof(TurnManager.DoUpkeepPhase))]
         [HarmonyPostfix]
@@ -237,11 +244,8 @@ namespace StressCost.Patches
         [HarmonyPrefix]
         public static void ResetPlayerTwo(TurnManager __instance)
         {
-            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("tvflabs.inscryption.MultiplayerMod"))
-            {
-                Patches.CostGraphicPatches.disAlchemyCounter.ResetPlayerTwo();
-                Cost.StressCost.ResetPlayerTwo();
-            }
+            Patches.CostGraphicPatches.disAlchemyCounter.ResetPlayerTwo();
+            Cost.StressCost.ResetPlayerTwo();
         }
     }
 }

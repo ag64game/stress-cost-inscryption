@@ -23,7 +23,7 @@ namespace StressCost.Sigils
         {
             yield return PreSuccessfulTriggerSequence();
             Card.Anim.StrongNegationEffect();
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} slakes on the blood of {target.Info.DisplayedNameEnglish}", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} slakes on the blood of {target.Info.DisplayedNameEnglish}", (GBC.TextBox.Style)Card.Info.temple);
             yield return new WaitForSeconds(0.25f);
 
             base.Card.AddTemporaryMod(new CardModificationInfo(0, amount));

@@ -57,7 +57,7 @@ namespace StressCost.Sigils
             if (slot.Card != null)
             {
                 PlayableCard switched = slot.Card;
-                if(!slot.Equals(Card.Slot)) yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} switched places with {switched.Info.displayedName}.", TextBox.Style.Neutral);
+                if(!slot.Equals(Card.Slot)) yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} switched places with {switched.Info.displayedName}.", (GBC.TextBox.Style)Card.Info.temple);
                 yield return Singleton<BoardManager>.Instance.AssignCardToSlot(switched, base.Card.Slot, 0.1f, null, true);
             }
             yield return Singleton<BoardManager>.Instance.AssignCardToSlot(base.Card, slot, 0.1f, null, true);

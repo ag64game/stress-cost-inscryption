@@ -8,6 +8,7 @@ using HarmonyLib;
 using InscryptionAPI.Ascension;
 using InscryptionAPI.Boons;
 using InscryptionAPI.Card;
+using InscryptionAPI.Card.CostProperties;
 using InscryptionAPI.Encounters;
 using InscryptionAPI.Helpers;
 using InscryptionAPI.Helpers.Extensions;
@@ -122,7 +123,7 @@ namespace StressCost
             elixirCost.SetCanBePlayedByTurn2WithHand(Cost.FairHandElixir.CanBePlayed);
 
             FullCardCost stardustCost = Register(GUID, "StardustCost", typeof(Cost.StardustCost), Cost.StardustCost.Texture_3D, Cost.StardustCost.Texture_Pixel);
-            stardustCost.SetCostTier(Cost.CostTier.CostTierS);
+            stardustCost.SetCostTier(Cost.CostTier.CostTierF);
             stardustCost.ResourceType = (ResourceType)42;
             stardustCost.SetCanBePlayedByTurn2WithHand(Cost.FairHandStardust.CanBePlayed);
         }

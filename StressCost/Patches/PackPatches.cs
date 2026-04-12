@@ -92,10 +92,10 @@ namespace StressCost.Patches
             catch { }
 
             if (!addedToDeck && BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("mrfantastik.inscryption.infact2"))
-            {
-                SetupSideDeckCards();
-                addedToDeck = true;
-            }
+                {
+                    SetupSideDeckCards();
+                    addedToDeck = true;
+                }
         }
 
         public static void SetupStarterDecks()

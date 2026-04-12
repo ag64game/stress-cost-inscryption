@@ -20,7 +20,7 @@ namespace StressCost.Sigils
         public override IEnumerator OnUpkeep(bool playerUpkeep)
         {
             yield return PreSuccessfulTriggerSequence();
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName}'s eldritch presence beckons towards you.", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName}'s eldritch presence beckons towards you.", (GBC.TextBox.Style)Card.Info.temple);
             yield return new WaitForSeconds(0.2f);
             try
             {

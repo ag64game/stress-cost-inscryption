@@ -18,15 +18,11 @@ namespace StressCost.Sigils
         public override Ability Ability => ability;
 
         private bool textDisplayed = false;
-        private int spiedCount = 0;
+        public static int spiedCountPlayer = 0, spiedCountEnemy = 0;
 
         public override bool RespondsToOtherCardResolve(PlayableCard otherCard)
         {
             return otherCard.OpponentCard != base.Card.OpponentCard;
-        }
-        public override bool RespondsToAttackEnded()
-        {
-            return Card.OpponentCard && spiedCount > 0 && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("tvflabs.inscryption.MultiplayerMod");
         }
         public override bool RespondsToUpkeep(bool playerUpkeep)
         {
@@ -40,64 +36,20 @@ namespace StressCost.Sigils
             if (!textDisplayed)
             {
                 textDisplayed = true;
-                yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} spied on incoming {otherCard.Info.displayedName}!", TextBox.Style.Neutral);
+                yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} spied on incoming {otherCard.Info.displayedName}!", (GBC.TextBox.Style)Card.Info.temple);
             }
 
             base.Card.Anim.StrongNegationEffect();
 
-            if (Card.OpponentCard)
-            {
-                spiedCount++;
-            } else
-            {
-                yield return Singleton<CardDrawPiles>.Instance.DrawCardFromDeck(null, null);
-            }
-                yield return base.LearnAbility(0.1f);
-        }
-
-        public override IEnumerator OnAttackEnded()
-        {
-            if (Card.OpponentCard)
-            {
-                List<CardSlot> slots = Singleton<BoardManager>.Instance.opponentSlots.Where(slot => Singleton<BoardManager>.Instance.GetCardQueuedForSlot(slot) == null).ToList();
-                List<PlayableCard> cards = Singleton<BoardManager>.Instance.GetOpponentCards();
-
-                for (int i = 0; i < spiedCount / 2; i++)
-                {
-                    CardInfo newCard = CardLoader.GetCardByName(cards[UnityEngine.Random.Range(0, cards.Count)].Info.name);
-
-
-                    if (slots.Count > 0 && spiedCount > 1)
-                    {
-                        PlayableCard playableCard = CardSpawner.SpawnPlayableCard(newCard);
-                        playableCard.SetIsOpponentCard(true);
-                        Singleton<TurnManager>.Instance.Opponent.ModifyQueuedCard(playableCard);
-
-                        Singleton<BoardManager>.Instance.QueueCardForSlot(playableCard, slots[UnityEngine.Random.Range(0, slots.Count)]);
-                        Singleton<TurnManager>.Instance.Opponent.Queue.Add(playableCard);
-                        spiedCount /= 2;
-                    }
-                }
-                
-
-            }
-
-            return base.OnAttackEnded();
+            if (Card.OpponentCard) spiedCountEnemy++; else spiedCountPlayer++;
+            yield return base.LearnAbility(0.1f);
         }
 
         public override IEnumerator OnUpkeep(bool playerUpkeep)
         {
-            yield return base.PreSuccessfulTriggerSequence();
-            
-            if(!Card.OpponentCard && spiedCount > 0)
-            {
-                for (int i = 0; i < spiedCount; i++) yield return Singleton<CardDrawPiles>.Instance.DrawCardFromDeck(null, null);
-                spiedCount = 0;
-            }
-
             textDisplayed = false;
 
-            yield return base.LearnAbility(0.1f);
+            return base.OnUpkeep(playerUpkeep);
         }
 
         public static void AddWatchman()

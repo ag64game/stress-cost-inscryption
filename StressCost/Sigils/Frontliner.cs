@@ -20,7 +20,7 @@ namespace StressCost.Sigils
         {
             base.Card.Anim.StrongNegationEffect();
             yield return new WaitForSeconds(0.2f);
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName}'s bravery amplified it's morale", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName}'s bravery amplified it's morale", (GBC.TextBox.Style)Card.Info.temple);
 
             var mod = new CardModificationInfo(0, 0);
             mod.SetExtendedProperty("ValorRank", 1);

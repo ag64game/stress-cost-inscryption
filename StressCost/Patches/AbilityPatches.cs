@@ -108,5 +108,41 @@ namespace StressCost.Patches
 
             yield return enumerator;
         }
+
+        [HarmonyPatch(typeof(TurnManager), nameof(TurnManager.DoUpkeepPhase))]
+        [HarmonyPostfix]
+        public static IEnumerator WatchmanPlaceCards(IEnumerator enumerator, TurnManager __instance, bool playerUpkeep)
+        {
+            if (AbilWatchman.spiedCountEnemy > 0)
+            {
+                List<CardSlot> slots = Singleton<BoardManager>.Instance.opponentSlots.Where(slot => Singleton<BoardManager>.Instance.GetCardQueuedForSlot(slot) == null).ToList();
+                List<PlayableCard> cards = Singleton<BoardManager>.Instance.GetOpponentCards();
+
+                for (int i = 0; i < AbilWatchman.spiedCountEnemy / 2; i++)
+                {
+                    CardInfo newCard = CardLoader.GetCardByName(cards[UnityEngine.Random.Range(0, cards.Count)].Info.name);
+
+
+                    if (slots.Count > 0 && AbilWatchman.spiedCountEnemy > 1)
+                    {
+                        PlayableCard playableCard = CardSpawner.SpawnPlayableCard(newCard);
+                        playableCard.SetIsOpponentCard(true);
+                        Singleton<TurnManager>.Instance.Opponent.ModifyQueuedCard(playableCard);
+
+                        Singleton<BoardManager>.Instance.QueueCardForSlot(playableCard, slots[UnityEngine.Random.Range(0, slots.Count)]);
+                        Singleton<TurnManager>.Instance.Opponent.Queue.Add(playableCard);
+                        AbilWatchman.spiedCountEnemy /= 2;
+                    }
+                }
+            }
+
+            if (AbilWatchman.spiedCountPlayer > 0)
+            {
+                for (int i = 0; i < AbilWatchman.spiedCountPlayer; i++) yield return Singleton<CardDrawPiles>.Instance.DrawCardFromDeck(null, null);
+                AbilWatchman.spiedCountPlayer = 0;
+            }
+
+            yield return enumerator;
+        }
     }
 }

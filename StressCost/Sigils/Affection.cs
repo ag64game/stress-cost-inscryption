@@ -20,7 +20,7 @@ namespace StressCost.Sigils
         {
             base.Card.Anim.StrongNegationEffect();
             yield return new WaitForSeconds(0.2f);
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} preformed a seducive dance!", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} preformed a seducive dance!", (GBC.TextBox.Style)Card.Info.temple);
 
             if (Cost.StressCost.stressCounter > 0) Cost.StressCost.stressCounter -= 1;
 

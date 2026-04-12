@@ -31,7 +31,7 @@ namespace StressCost.Sigils
 
             if (slots.Count > 0)
             {
-                yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} absorbs the mana of the crystals!", TextBox.Style.Magic);
+                yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} absorbs the mana of the crystals!", (GBC.TextBox.Style)Card.Info.temple);
 
                 foreach (CardSlot gemSlot in slots)
                 {

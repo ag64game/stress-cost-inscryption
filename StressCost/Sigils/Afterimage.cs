@@ -34,7 +34,7 @@ namespace StressCost.Sigils
         {
             doDodge = false;
             yield return base.PreSuccessfulTriggerSequence();
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} responds with a vicious counter attack!", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} responds with a vicious counter attack!", (GBC.TextBox.Style)Card.Info.temple);
 
             base.Card.Anim.PlayAttackAnimation(attacker.OpponentCard, attacker.Slot);
             yield return new WaitForSeconds(0.175f);

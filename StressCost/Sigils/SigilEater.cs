@@ -20,7 +20,7 @@ namespace StressCost.Sigils
         public override IEnumerator OnOtherCardDie(PlayableCard card, CardSlot deathSlot, bool fromCombat, PlayableCard killer)
         {
             yield return base.PreSuccessfulTriggerSequence();
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} absorbs the powers of {deathSlot.Card.Info.displayedName}.", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} absorbs the powers of {deathSlot.Card.Info.displayedName}.", (GBC.TextBox.Style)Card.Info.temple);
             yield return new WaitForSeconds(0.2f);
 
             CardModificationInfo newMod = new CardModificationInfo();

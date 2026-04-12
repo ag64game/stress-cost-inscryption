@@ -23,7 +23,7 @@ namespace StressCost.Sigils
 
         public override System.Collections.IEnumerator Activate()
         {
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName}'s rage crept further", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName}'s rage crept further", (GBC.TextBox.Style)Card.Info.temple);
 
             this.Card.temporaryMods.Add(new CardModificationInfo(1, 1));
 

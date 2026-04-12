@@ -33,7 +33,7 @@ namespace StressCost.Sigils
 
             foreach (PlayableCard card in cards) if (card.Health < card.MaxHealth + 1) card.HealDamage(1);
 
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} tended to the wounds of it's allies.", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} tended to the wounds of it's allies.", (GBC.TextBox.Style)Card.Info.temple);
 
             yield return LearnAbility(0.2f);
         }

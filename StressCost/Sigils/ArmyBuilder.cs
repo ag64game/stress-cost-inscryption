@@ -26,7 +26,7 @@ namespace StressCost.Sigils
 
             if (slots.Where(slot => slot.Card == null).Count() > 0)
             {
-                yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} called upon the strength of it's soliders!", TextBox.Style.Neutral);
+                yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} called upon the strength of it's soliders!", (GBC.TextBox.Style)Card.Info.temple);
 
                 string troopName = "Squirrel";
                 string modPrefix = Card.Info.GetModPrefix();

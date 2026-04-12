@@ -57,7 +57,7 @@ namespace StressCost.Sigils
             string traveller = slot.Card.Info.name;
             yield return slot.Card.Die(false);
 
-            Singleton<TextBox>.Instance.ShowUntilInput($"{slot.Card.Info.displayedName} underwent Time Travel!", TextBox.Style.Neutral);
+            Singleton<TextBox>.Instance.ShowUntilInput($"{slot.Card.Info.displayedName} underwent Time Travel!", (GBC.TextBox.Style)Card.Info.temple);
             
             yield return slot.CreateCardInSlot(CardLoader.GetCardByName(traveller));
             yield return true;

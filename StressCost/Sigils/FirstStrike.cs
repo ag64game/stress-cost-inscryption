@@ -20,7 +20,7 @@ namespace StressCost.Sigils
         public override IEnumerator OnResolveOnBoard()
         {
             yield return PreSuccessfulTriggerSequence();
-            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} took a free shot!", TextBox.Style.Neutral);
+            yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} took a free shot!", (GBC.TextBox.Style)Card.Info.temple);
 
             CardSlot opponent = base.Card.Slot.opposingSlot;
 
