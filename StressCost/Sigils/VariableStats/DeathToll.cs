@@ -16,10 +16,24 @@ namespace StressCost.Sigils.VariableStats
         public override SpecialStatIcon IconType => iconType;
 
         public static int killCount = 0;
+        public static int secondPlayer = 0;
 
         public override int[] GetStatValues()
         {
             return new int[] { killCount, 0 };
+        }
+
+        public static void SwitchPlayer()
+        {
+            int temp = killCount;
+            killCount = secondPlayer;
+            secondPlayer = temp;
+        }
+
+        public static void ResetKillCounts()
+        {
+            secondPlayer = 0;
+            killCount = 0;
         }
 
         public static void AddDeathToll()

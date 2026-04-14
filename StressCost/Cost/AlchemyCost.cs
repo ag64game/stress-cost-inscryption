@@ -153,6 +153,11 @@ namespace StressCost.Cost
         private void Awake()
         {
             float x = -2.125f, y = 0.51f;
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots"))
+            {
+                x = -2.09125f;
+                y = 1.09f;
+            }
 
             for (int i = 0; i < dies.Length; i++)
             {
@@ -168,14 +173,25 @@ namespace StressCost.Cost
                 dies[i].gameObject.transform.SetParent(transform, false);
 
 
-                if ((i + 1) % 2 == 0)
+                if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots"))
                 {
-                    x -= size;
-                    y -= size;
+                    if ((i + 1) % 2 == 0)
+                    {
+                        x -= size;
+                        y -= size;
+                    }
+                    else x += size;
+                } else
+                {
+                    if ((i + 1) % 2 == 0)
+                    {
+                        x += size;
+                        y -= size;
+                    }
+                    else y += size;
                 }
-                else x += size;
 
-                ResetPlayerTwo();
+                    ResetPlayerTwo();
             }
         }
 

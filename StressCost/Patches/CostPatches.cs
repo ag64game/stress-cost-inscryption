@@ -235,6 +235,7 @@ namespace StressCost.Patches
                 {
                     Patches.CostGraphicPatches.disAlchemyCounter.SwitchPlayer();
                     Cost.StressCost.SwitchPlayer();
+                    VariablestatDeathToll.SwitchPlayer();
                 }
             }
 
@@ -247,6 +248,7 @@ namespace StressCost.Patches
         {
             Patches.CostGraphicPatches.disAlchemyCounter.ResetPlayerTwo();
             Cost.StressCost.ResetPlayerTwo();
+            VariablestatDeathToll.ResetKillCounts();
         }
     }
 }

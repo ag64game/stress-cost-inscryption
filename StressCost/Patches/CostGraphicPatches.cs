@@ -144,6 +144,12 @@ namespace StressCost.Patches
                     RenderAlchemyCollection();
                 }
                 catch { }
+
+                if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots"))
+                {
+                    PixelResourcesManager.Instance.gameObject.transform.Find("Bones").gameObject.transform.position = new Vector3(-1.945f, 0.96f, 0);
+                    PixelResourcesManager.Instance.gameObject.transform.Find("Gems").gameObject.transform.position = new Vector3(-1.9135f, 0.82f, 0);
+                }
             }
 
             return enumerator;
@@ -164,15 +170,21 @@ namespace StressCost.Patches
 
                 Texture2D texture = TextureHelper.GetImageAsTexture($"displaycost_stress.png", typeof(CostmaniaPlugin).Assembly);
 
-                stressDis.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
+                if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots")) stressDis.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
                     texture,
                     new Rect(0, 0, texture.width, texture.height),
                     new Vector2(13.7f, -6.5f)
                     );
+                else stressDis.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
+                    texture,
+                    new Rect(0, 0, texture.width, texture.height),
+                    new Vector2(7.24f, -7.8f)
+                    );
 
                 GameObject numsBorder = stressDis.gameObject.FindChild("PixelBorderNumeral");
                 disStressCounter = numsBorder.GetComponent<PixelNumeral>();
-                numsBorder.transform.position = new Vector3(-2.08f, 0.94f, 0);
+                if(!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots")) numsBorder.transform.position = new Vector3(-2.08f, 0.94f, 0);
+                else numsBorder.transform.position = new Vector3(-1.44f, 1.132f, 0);
             }
             catch (Exception e)
             {
@@ -195,15 +207,21 @@ namespace StressCost.Patches
 
                 Texture2D texture = TextureHelper.GetImageAsTexture($"displaycost_valor.png", typeof(CostmaniaPlugin).Assembly);
 
-                valorDis.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
+                if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots")) valorDis.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
                     texture,
                     new Rect(0, 0, texture.width, texture.height),
                     new Vector2(13.7f, -5.5f)
                     );
+                else valorDis.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
+                    texture,
+                    new Rect(0, 0, texture.width, texture.height),
+                    new Vector2(14.2f, -6.42f)
+                    );
 
                 GameObject numsBorder = valorDis.gameObject.FindChild("PixelBorderNumeral");
                 disValorCounter = numsBorder.GetComponent<PixelNumeral>();
-                numsBorder.transform.position = new Vector3(-2.08f, 0.80f, 0);
+                if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots")) numsBorder.transform.position = new Vector3(-2.08f, 0.80f, 0);
+                else numsBorder.transform.position = new Vector3(-2.13f, 0.932f, 0);
             }
             catch (Exception e)
             {
@@ -226,15 +244,21 @@ namespace StressCost.Patches
 
                 Texture2D texture = TextureHelper.GetImageAsTexture($"displaycost_stardust.png", typeof(CostmaniaPlugin).Assembly);
 
-                stardustDis.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
+                if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots")) stardustDis.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
                     texture,
                     new Rect(0, 0, texture.width, texture.height),
                     new Vector2(13.7f, -6.4f)
                     );
+                else stardustDis.GetComponent<SpriteRenderer>().sprite = Sprite.Create(
+                    texture,
+                    new Rect(0, 0, texture.width, texture.height),
+                    new Vector2(14.2f, -7.55f)
+                    );
 
                 GameObject numsBorder = stardustDis.gameObject.FindChild("PixelBorderNumeral");
                 disStardustCounter = numsBorder.GetComponent<PixelNumeral>();
-                numsBorder.transform.position = new Vector3(-2.08f, 0.67f, 0);
+                if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots"))  numsBorder.transform.position = new Vector3(-2.08f, 0.67f, 0);
+                else numsBorder.transform.position = new Vector3(-2.13f, 0.792f, 0);
             }
             catch (Exception e)
             {
