@@ -57,6 +57,8 @@ namespace StressCost.Patches
                 foreach (GameObject card in Array.FindAll(CostmaniaPlugin.FindObjectsOfType<GameObject>(), obj => obj.name.Contains("Card (")))
                     try { UpdateValorRank(card.gameObject); }
                     catch { }
+
+                UpdateTerrainDesc();
             }
         }
 
@@ -98,8 +100,7 @@ namespace StressCost.Patches
                 try { info = __instance.gameObject.GetComponent<PixelSelectableCard>().Info; }
                 catch { info = __instance.gameObject.GetComponent<PixelPlayableCard>().Info; }
 
-                int? baseVal = info.GetExtendedPropertyAsInt("ValorRank");
-                if (baseVal == null) baseVal = 0;
+                int baseVal = info.ValorRank();
 
                 if (rankText == null)
                 {
@@ -262,6 +263,22 @@ namespace StressCost.Patches
 
             aga.transform.SetParent(PixelResourcesManager.Instance.gameObject.transform);
             aga.SetActive(true);
+        }
+
+
+        private static string last = "";
+        private static void UpdateTerrainDesc()
+        {
+            var scrollArea = Singleton<PixelScrollArea>.Instance;
+            string desc = "";
+            foreach (string line in scrollArea.fullLines) desc += line;
+
+            if (last == null || last != desc)
+            {
+                scrollArea.SetText(desc.Replace("CAN'T BE SACRIFICED.", "CAN'T BE SACRIFICED OR PROMOTED."));
+                last = desc;
+            }
+
         }
     }
 }

@@ -106,12 +106,12 @@ namespace StressCost.Patches
             GBC.StarterDecks.NATURE_STARTER.AddRange(alchemyDeck);
 
             string[] stressDeck = { "Stress_Pills", "Stress_Pills", "Stress_Pills", "Stress_Pills", "Stress_Pills", "Stress_Myso", "Stress_Myso", "Stress_Myso", "Stress_Ekrixi",
-            "Stress_Ekrixi", "Stress_Venustra", "Stress_Venustra", "Stress_Obeso", "Stress_Obeso", "Stress_Venustra", "Stress_Myso", "Stress_Aero", "Stress_Aero", "Stress_Ommeta", "Stress_Ommeta"};
+            "Stress_Ekrixi", "Stress_Venustra", "Stress_Venustra", "Stress_Obeso", "Stress_Obeso", "Stress_Venustra", "Stress_Myso", "Stress_Aero", "Stress_Aero", "Stress_Aero", "Stress_Obeso"};
             GBC.StarterDecks.UNDEAD_STARTER.AddRange(stressDeck);
 
             string[] spaceDeck = { "Space_Telescope", "Space_Telescope", "Space_Telescope", "Space_Telescope", "Space_Telescope", "Space_Alien", "Space_Alien", "Space_Alien",
                 "Space_ShootingStar", "Space_ShootingStar", "Space_ShootingStar", "Space_Asteroid", "Space_Asteroid", "Space_Stargazer",
-                "Space_Stargazer", "Space_Asteroid", "Space_Alien", "Space_Exomorph", "Space_Exomorph", "Space_Alien", };
+                "Space_Stargazer", "Space_Asteroid", "Space_Alien", "Space_Exomorph", "Space_Exomorph", "Space_Alien"};
             GBC.StarterDecks.TECH_STARTER.AddRange(spaceDeck);
 
             string[] valorDeck = { "Valor_WarBanner", "Valor_WarBanner", "Valor_WarBanner", "Valor_WarBanner", "Valor_WarBanner", "Valor_InfantryKnight", "Valor_InfantryKnight", "Valor_InfantryKnight",
