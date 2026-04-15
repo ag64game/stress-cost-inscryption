@@ -1,0 +1,14 @@
+{
+  "name": "SentryScout",
+  "modPrefix": "Valor",
+  "displayedName": "Sentry Scout",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "abilities": [ "Sentry", "StressSigils.Warper" ],
+  "pixelTexture":"pixel_sentryscout.png",
+  "extensionProperties": {
+  "ValorCost": "2"
+  }
+}

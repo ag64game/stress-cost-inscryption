@@ -1,0 +1,13 @@
+{
+  "name": "Myso",
+  "modPrefix": "Stress",
+  "displayedName": "Myso",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 1,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_myso.png",
+  "extensionProperties": {
+  "StressCost": "3"
+  }
+}

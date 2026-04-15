@@ -1,0 +1,18 @@
+{
+  "name": "GolemGeneral",
+  "modPrefix": "Alchemy",
+  "displayedName": "Golem General",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Nature",
+  "baseAttack": 2,
+  "baseHealth": 4,
+  "pixelTexture":"pixel_golemgeneral.png",
+  "abilities": [ "StressSigils.Ironclad", "StressSigils.Army Builder" ],
+  "extensionProperties": {
+  "MetalCost": "2",
+  "ElixirCost": "5",
+  "ValorRank": "2",
+  "TroopName": "Alchemy_Golem"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

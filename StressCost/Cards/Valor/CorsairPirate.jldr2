@@ -1,0 +1,14 @@
+{
+  "name": "CorsairPirate",
+  "modPrefix": "Valor",
+  "displayedName": "Corsair Pirate",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 1,
+  "baseHealth": 1,
+  "abilities": [ "SplitStrike" ],
+  "pixelTexture":"pixel_corsairpirate.png",
+  "extensionProperties": {
+  "ValorCost": "2"
+  }
+}

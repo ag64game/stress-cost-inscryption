@@ -1,0 +1,18 @@
+{
+  "name": "MysteriousVat3",
+  "modPrefix": "Alchemy",
+  "displayedName": "Mysterious Vat",
+  "temple": "Nature",
+  "baseAttack": 0,
+  "baseHealth": 4,
+  "pixelTexture":"pixel_mysteriousvat.png",
+  "abilities": [ "IceCube", "Evolve" ],
+  "evolveIntoName": "Alchemy_MysteriousVat4",
+  "iceCubeName":"Alchemy_VatAbomination",
+  "extensionProperties": {
+  "FleshCost": "1",
+  "MetalCost": "1",
+  "ElixirCost": "1"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

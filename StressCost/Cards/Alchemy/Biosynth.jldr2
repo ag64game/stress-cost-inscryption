@@ -1,0 +1,15 @@
+{
+  "name": "Biosynth",
+  "modPrefix": "Alchemy",
+  "displayedName": "Biosynth",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 3,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_biosynth.png",
+  "extensionProperties": {
+  "FleshCost": "2",
+  "MetalCost": "1",
+  "ElixirCost": "1"
+  }
+}

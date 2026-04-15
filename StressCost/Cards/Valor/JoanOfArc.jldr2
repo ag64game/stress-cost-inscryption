@@ -1,0 +1,16 @@
+{
+  "name": "JoanOfArc",
+  "modPrefix": "Valor",
+  "displayedName": "Joan Of Arc",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Wizard",
+  "baseAttack": 1,
+  "baseHealth": 3,
+  "pixelTexture":"pixel_joanofarc.png",
+  "abilities": ["StressSigils.Army Builder", "BuffNeighbours" ],
+  "extensionProperties": {
+  "ValorCost": "3",
+  "ValorRank": "2"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

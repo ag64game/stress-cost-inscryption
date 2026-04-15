@@ -1,0 +1,12 @@
+{
+  "name": "VatAbomination",
+  "modPrefix": "Alchemy",
+  "displayedName": "Vat Abomination",
+  "temple": "Nature",
+  "baseAttack": 3,
+  "baseHealth": 3,
+  "pixelTexture":"pixel_vatabomination.png",
+  "abilities": [ "DoubleStrike" ],
+  "evolveIntoName":"Alchemy_SapiensUltima",
+  "appearanceBehaviour": ["RareCardBackground"]
+}

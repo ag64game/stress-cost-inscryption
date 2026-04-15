@@ -1,0 +1,16 @@
+{
+  "name": "MegaCyborg",
+  "modPrefix": "Alchemy",
+  "displayedName": "Mega Cyborg",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Nature",
+  "baseAttack": 4,
+  "baseHealth": 7,
+  "pixelTexture":"pixel_megacyborg.png",
+  "abilities": [ "StrafePush" ],
+  "extensionProperties": {
+  "FleshCost": "5",
+  "MetalCost": "5"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

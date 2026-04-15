@@ -1,0 +1,14 @@
+{
+  "name": "Oracle",
+  "modPrefix": "Valor",
+  "displayedName": "Oracle",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 0,
+  "baseHealth": 1,
+  "abilities": [ "Tutor" ],
+  "pixelTexture":"pixel_oracle.png",
+  "extensionProperties": {
+  "ValorCost": "1"
+  }
+}

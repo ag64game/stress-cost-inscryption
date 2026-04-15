@@ -1,0 +1,12 @@
+{
+  "name": "Pills",
+  "modPrefix": "Stress",
+  "displayedName": "Pills",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 0,
+  "baseHealth": 1,
+  "traits":["Terrain"],
+  "abilities": ["StressSigils.Relaxant"],
+  "pixelTexture":"pixel_pills.png"
+}

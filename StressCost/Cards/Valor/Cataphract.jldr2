@@ -1,0 +1,14 @@
+{
+  "name": "Cataphract",
+  "modPrefix": "Valor",
+  "displayedName": "Cataphract",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 2,
+  "baseHealth": 3,
+  "abilities": [ "DeathShield" ],
+  "pixelTexture":"pixel_cataphract.png",
+  "extensionProperties": {
+  "ValorCost": "3"
+  }
+}

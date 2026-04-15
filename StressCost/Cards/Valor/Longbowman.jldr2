@@ -1,0 +1,14 @@
+{
+  "name": "Longbowman",
+  "modPrefix": "Valor",
+  "displayedName": "Longbowman",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 1,
+  "baseHealth": 1,
+  "abilities": [ "Sniper" ],
+  "pixelTexture":"pixel_longbowman.png",
+  "extensionProperties": {
+  "ValorCost": "2"
+  }
+}

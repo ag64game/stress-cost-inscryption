@@ -1,0 +1,15 @@
+{
+  "name": "Arquebus",
+  "modPrefix": "Alchemy",
+  "displayedName": "Arquebus",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 1,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_arquebus.png",
+  "abilities": [ "StressSigils.Ironclad", "Sniper" ],
+  "extensionProperties": {
+  "MetalCost": "2",
+  "ElixirCost": "2"
+  }
+}

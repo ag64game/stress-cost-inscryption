@@ -1,0 +1,14 @@
+{
+  "name": "Commandant",
+  "modPrefix": "Valor",
+  "displayedName": "Commandant",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 1,
+  "baseHealth": 4,
+  "abilities": [ "BuffNeighbours" ],
+  "pixelTexture":"pixel_commandant.png",
+  "extensionProperties": {
+  "ValorCost": "4"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "OriginalStarwalker",
+  "modPrefix": "Space",
+  "displayedName": "Original Starwalker",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Tech",
+  "baseAttack": 2,
+  "baseHealth": 4,
+  "abilities": ["Strafe"],
+  "pixelTexture":"pixel_originalstarwalker.png",
+  "extensionProperties": {
+  "StardustCost": "4"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

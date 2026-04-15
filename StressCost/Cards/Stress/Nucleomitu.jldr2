@@ -1,0 +1,15 @@
+{
+  "name": "Nucleomitu",
+  "modPrefix": "Stress",
+  "displayedName": "Nucleomitu",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Undead",
+  "baseAttack": 6,
+  "baseHealth": 6	,
+  "abilities": ["ExplodeOnDeath"],
+  "pixelTexture":"pixel_nucleomitu.png",
+  "extensionProperties": {
+  "StressCost": "12"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

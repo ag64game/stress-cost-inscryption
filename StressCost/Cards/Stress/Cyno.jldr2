@@ -1,0 +1,14 @@
+{
+  "name": "Cyno",
+  "modPrefix": "Stress",
+  "displayedName": "Cyno",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 2,
+  "baseHealth": 4,
+  "abilities": ["GuardDog"],
+  "pixelTexture":"pixel_cyno.png",
+  "extensionProperties": {
+  "StressCost": "5"
+  }
+}

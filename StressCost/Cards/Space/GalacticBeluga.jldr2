@@ -1,0 +1,14 @@
+{
+  "name": "GalacticBeluga",
+  "modPrefix": "Space",
+  "displayedName": "Galactic Beluga",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 4,
+  "baseHealth": 4,
+  "pixelTexture":"pixel_cosmicbeluga.png",
+  "abilities": [ "Submerge" ],
+  "extensionProperties": {
+  "StardustCost": "9"
+  }
+}

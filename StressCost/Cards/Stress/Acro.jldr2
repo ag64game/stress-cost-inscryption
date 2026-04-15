@@ -1,0 +1,14 @@
+{
+  "name": "Acro",
+  "modPrefix": "Stress",
+  "displayedName": "Acro",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "abilities": [ "StressSigils.Liftoff" ],
+  "pixelTexture":"pixel_acro.png",
+  "extensionProperties": {
+  "StressCost": "6"
+  }
+}

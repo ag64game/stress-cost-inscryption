@@ -1,0 +1,12 @@
+{
+  "name": "Telescope",
+  "modPrefix": "Space",
+  "displayedName": "Telescope",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "pixelTexture":"pixel_telescope.png",
+  "traits":["Terrain"],
+  "baseAttack": 0,
+  "baseHealth": 1,
+  "abilities": [ "StressSigils.Starbringer" ]
+}

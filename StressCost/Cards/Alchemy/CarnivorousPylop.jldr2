@@ -1,0 +1,14 @@
+{
+  "name": "CarnivorousPylop",
+  "modPrefix": "Alchemy",
+  "displayedName": "Carnivorous Pylop",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 2,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_carnivorouspylop.png",
+  "extensionProperties": {
+  "FleshCost": "2",
+  "ElixirCost": "1"
+  }
+}

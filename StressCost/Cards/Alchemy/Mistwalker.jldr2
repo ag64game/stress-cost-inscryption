@@ -1,0 +1,15 @@
+{
+  "name": "Mistwalker",
+  "modPrefix": "Alchemy",
+  "displayedName": "Mistwalker",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 2,
+  "baseHealth": 3,
+  "pixelTexture":"pixel_mistwalker.png",
+  "abilities": [ "Flying", "Reach" ],
+  "extensionProperties": {
+  "FleshCost": "2",
+  "ElixirCost": "4"
+  }
+}

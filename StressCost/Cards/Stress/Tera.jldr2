@@ -1,0 +1,15 @@
+{
+  "name": "Tera",
+  "modPrefix": "Stress",
+  "displayedName": "Tera",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Undead",
+  "baseAttack": 3,
+  "baseHealth": 4,
+  "pixelTexture":"pixel_tera.png",
+  "extensionProperties": {
+  "StressCost": "8"
+  },
+  "abilities": ["Submerge", "GainAttackOnKill"],
+  "appearanceBehaviour": ["RareCardBackground"]
+}

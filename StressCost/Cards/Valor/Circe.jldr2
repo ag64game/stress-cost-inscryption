@@ -1,0 +1,15 @@
+{
+  "name": "Circe",
+  "modPrefix": "Valor",
+  "displayedName": "Circe",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Wizard",
+  "baseAttack": 1,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_circe.png",
+  "extensionProperties": {
+  "ValorCost": "2",
+  "ValorRank": "2"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

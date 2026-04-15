@@ -1,0 +1,14 @@
+{
+  "name": "Ekrixi",
+  "modPrefix": "Stress",
+  "displayedName": "Ekrixi",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 0,
+  "baseHealth": 1,
+  "abilities": ["ExplodeOnDeath"],
+  "pixelTexture":"pixel_ekrixi.png",
+  "extensionProperties": {
+  "StressCost": "2"
+  }
+}

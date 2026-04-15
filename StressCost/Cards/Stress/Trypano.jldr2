@@ -1,0 +1,14 @@
+{
+  "name": "Trypano",
+  "modPrefix": "Stress",
+  "displayedName": "Trypano",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 1,
+  "baseHealth": 4,
+  "abilities": ["Sharp"],
+  "pixelTexture":"pixel_trypano.png",
+  "extensionProperties": {
+  "StressCost": "4"
+  }
+}

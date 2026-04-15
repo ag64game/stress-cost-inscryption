@@ -1,0 +1,14 @@
+{
+  "name": "Venustra",
+  "modPrefix": "Stress",
+  "displayedName": "Venustra",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "abilities": ["StressSigils.Affection"],
+  "pixelTexture":"pixel_venustra.png",
+  "extensionProperties": {
+  "StressCost": "3"
+  }
+}

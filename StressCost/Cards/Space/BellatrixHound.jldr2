@@ -1,0 +1,14 @@
+{
+  "name": "BellatrixHound",
+  "modPrefix": "Space",
+  "displayedName": "Bellatrix Hound",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 2,
+  "baseHealth": 3,
+  "pixelTexture":"pixel_bellatrixhound.png",
+  "abilities": [ "GuardDog" ],
+  "extensionProperties": {
+  "StardustCost": "5"
+  }
+}

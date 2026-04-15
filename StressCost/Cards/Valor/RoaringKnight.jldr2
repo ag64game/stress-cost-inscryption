@@ -1,0 +1,14 @@
+{
+  "name": "RoaringKnight",
+  "modPrefix": "Valor",
+  "displayedName": "Roaring Knight",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Wizard",
+  "baseAttack": 3,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_roaringknight.png",
+  "extensionProperties": {
+  "ValorCost": "3"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

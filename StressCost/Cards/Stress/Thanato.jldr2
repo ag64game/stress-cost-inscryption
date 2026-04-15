@@ -1,0 +1,17 @@
+{
+  "name": "Thanato",
+  "modPrefix": "Stress",
+  "displayedName": "Thanato",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Undead",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "specialStatIcon": "StressSigils.Death Toll",
+  "specialAbilities": [ "StressSigils.Death Toll", "StressSigils.Death Toll"],
+  "abilities": [ "StressSigils.First Strike" ],
+  "pixelTexture":"pixel_thanato.png",
+  "extensionProperties": {
+  "StressCost": "15"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

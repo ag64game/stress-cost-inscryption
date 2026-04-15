@@ -1,0 +1,14 @@
+{
+  "name": "InvasiveSpecies",
+  "modPrefix": "Space",
+  "displayedName": "Invasive Species",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 1,
+  "baseHealth": 1,
+  "pixelTexture":"pixel_invasivespecies.png",
+  "abilities": ["DrawCopyOnDeath", "StressSigils.Shattering Stardust" ],
+  "extensionProperties": {
+  "StardustCost": "4"
+  }
+}

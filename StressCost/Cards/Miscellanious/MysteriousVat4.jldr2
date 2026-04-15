@@ -1,0 +1,17 @@
+{
+  "name": "MysteriousVat4",
+  "modPrefix": "Alchemy",
+  "displayedName": "Mysterious Vat",
+  "temple": "Nature",
+  "baseAttack": 0,
+  "baseHealth": 4,
+  "pixelTexture":"pixel_mysteriousvat.png",
+  "abilities": [ "IceCube" ],
+  "iceCubeName":"Alchemy_SapiensUltima",
+  "extensionProperties": {
+  "FleshCost": "1",
+  "MetalCost": "1",
+  "ElixirCost": "1"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

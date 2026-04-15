@@ -1,0 +1,16 @@
+{
+  "name": "HelenaBalavatsky",
+  "modPrefix": "Valor",
+  "displayedName": "Helena Balavatsky",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Wizard",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_helenabalavatsky.png",
+  "abilities": ["StressSigils.Starbringer" ],
+  "extensionProperties": {
+  "ValorCost": "1",
+  "ValorRank": "1"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

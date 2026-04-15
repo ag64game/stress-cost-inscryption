@@ -1,0 +1,14 @@
+{
+  "name": "MutatedMeteorite",
+  "modPrefix": "Space",
+  "displayedName": "Mutated Meteorite",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 1,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_mutatedmeteorite.png",
+  "abilities": [ "GainAttackOnKill", "Strafe" ],
+  "extensionProperties": {
+  "StardustCost": "4"
+  }
+}

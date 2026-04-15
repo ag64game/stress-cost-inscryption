@@ -1,0 +1,15 @@
+{
+  "name": "Dystychi",
+  "modPrefix": "Stress",
+  "displayedName": "Dystychi",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Undead",
+  "baseAttack": 1,
+  "baseHealth": 3,
+  "pixelTexture":"pixel_dystychi.png",
+  "abilities": ["RandomAbility", "RandomAbility"],
+  "extensionProperties": {
+  "StressCost": "4"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

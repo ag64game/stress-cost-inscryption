@@ -1,0 +1,16 @@
+{
+  "name": "Braineater",
+  "modPrefix": "Alchemy",
+  "displayedName": "Braineater",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 2,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_braineater.png",
+  "abilities": [ "StressSigils.Sigil Eater" ],
+  "extensionProperties": {
+  "FleshCost": "2",
+  "MetalCost": "1",
+  "ElixirCost": "2"
+  }
+}

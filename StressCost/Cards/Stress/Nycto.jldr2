@@ -1,0 +1,14 @@
+{
+  "name": "Nycto",
+  "modPrefix": "Stress",
+  "displayedName": "Nycto",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 1,
+  "baseHealth": 2,
+  "abilities": ["PreventAttack"],
+  "pixelTexture":"pixel_nycto.png",
+  "extensionProperties": {
+  "StressCost": "5"
+  }
+}

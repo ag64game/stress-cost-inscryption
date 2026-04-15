@@ -1,0 +1,19 @@
+{
+  "name": "MysteriousVat1",
+  "modPrefix": "Alchemy",
+  "displayedName": "Mysterious Vat",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Nature",
+  "baseAttack": 0,
+  "baseHealth": 4,
+  "pixelTexture":"pixel_mysteriousvat.png",
+  "abilities": [ "IceCube", "Evolve" ],
+  "evolveIntoName": "Alchemy_MysteriousVat2",
+  "iceCubeName":"Alchemy_VatCreature",
+  "extensionProperties": {
+  "FleshCost": "1",
+  "MetalCost": "1",
+  "ElixirCost": "1"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Kosmemo",
+  "modPrefix": "Stress",
+  "displayedName": "Kosmemo",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "abilities": [ "StressSigils.Gem Absorber" ],
+  "pixelTexture":"pixel_kosmemo.png",
+  "extensionProperties": {
+  "StressCost": "4"
+  }
+}

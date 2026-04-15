@@ -1,0 +1,14 @@
+{
+  "name": "Wanderer",
+  "modPrefix": "Space",
+  "displayedName": "Wanderer",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 2,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_wanderer.png",
+  "abilities": [ "BuffNeighbours" ],
+  "extensionProperties": {
+  "StardustCost": "6"
+  }
+}

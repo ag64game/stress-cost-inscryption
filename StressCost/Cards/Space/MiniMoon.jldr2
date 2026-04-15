@@ -1,0 +1,16 @@
+{
+  "name": "MiniMoon",
+  "modPrefix": "Space",
+  "displayedName": "Mini Moon",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Tech",
+  "baseAttack": 1,
+  "baseHealth": 7,
+  "traits":["Terrain"],
+  "abilities": ["AllStrike", "MadeOfStone"],
+  "pixelTexture":"pixel_minimoon.png",
+  "extensionProperties": {
+  "StardustCost": "7"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

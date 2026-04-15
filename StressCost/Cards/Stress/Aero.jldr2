@@ -1,0 +1,14 @@
+{
+  "name": "Aero",
+  "modPrefix": "Stress",
+  "displayedName": "Aero",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 1,
+  "baseHealth": 4,
+  "abilities": [ "Flying" ],
+  "pixelTexture":"pixel_aero.png",
+  "extensionProperties": {
+  "StressCost": "4"
+  }
+}

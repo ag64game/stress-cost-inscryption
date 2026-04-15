@@ -1,0 +1,15 @@
+{
+  "name": "Scanoid",
+  "modPrefix": "Alchemy",
+  "displayedName": "Scanoid",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 1,
+  "baseHealth": 1,
+  "pixelTexture":"pixel_scanoid.png",
+  "abilities": [ "Loot" ],
+  "extensionProperties": {
+  "FleshCost": "1",
+  "MetalCost": "2"
+  }
+}

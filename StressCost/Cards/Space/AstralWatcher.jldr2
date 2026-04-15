@@ -1,0 +1,16 @@
+{
+  "name": "AstralWatcher",
+  "modPrefix": "Space",
+  "displayedName": "Astral Watcher",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 0,
+  "baseHealth": 4,
+  "specialStatIcon": "StressSigils.Mightier Pen",
+  "specialAbilities": [ "StressSigils.Mightier Pen", "StressSigils.Mightier Pen"],
+  "abilities": [ "Strafe" ],
+  "pixelTexture":"pixel_astralwatcher.png",
+  "extensionProperties": {
+  "StardustCost": "5"
+  }
+}

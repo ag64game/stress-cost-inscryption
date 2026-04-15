@@ -1,0 +1,14 @@
+{
+  "name": "BloodLancer",
+  "modPrefix": "Valor",
+  "displayedName": "Blood Lancer",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 1,
+  "baseHealth": 1,
+  "pixelTexture":"pixel_bloodlancer.png",
+  "abilities": [ "StressSigils.Blood Guzzler" ],
+  "extensionProperties": {
+  "ValorCost": "2"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "WarBanner",
+  "modPrefix": "Valor",
+  "displayedName": "War Banner",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "traits":["Terrain"],
+  "pixelTexture":"pixel_warbanner.png",
+  "extensionProperties": {
+  "ValorRank": "1"
+  }
+}

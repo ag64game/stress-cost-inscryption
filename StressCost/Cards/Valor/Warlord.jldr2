@@ -1,0 +1,14 @@
+{
+  "name": "Warlord",
+  "modPrefix": "Valor",
+  "displayedName": "Warlord",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 2,
+  "baseHealth": 3,
+  "pixelTexture":"pixel_warlord.png",
+  "abilities": [ "StressSigils.Fearmonger" ],
+  "extensionProperties": {
+  "ValorCost": "4"
+  }
+}

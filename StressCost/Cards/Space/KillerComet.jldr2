@@ -1,0 +1,14 @@
+{
+  "name": "KillerComet",
+  "modPrefix": "Space",
+  "displayedName": "Killer Comet",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 2,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_killercomet.png",
+  "abilities": [ "StrafeSwap" ],
+  "extensionProperties": {
+  "StardustCost": "4"
+  }
+}

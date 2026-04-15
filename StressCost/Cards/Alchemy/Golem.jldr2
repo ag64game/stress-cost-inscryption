@@ -1,0 +1,15 @@
+{
+  "name": "Golem",
+  "modPrefix": "Alchemy",
+  "displayedName": "Golem",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 1,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_golem.png",
+  "abilities": [ "StressSigils.Ironclad" ],
+  "extensionProperties": {
+  "MetalCost": "2",
+  "ElixirCost": "1"
+  }
+}

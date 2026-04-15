@@ -58,7 +58,7 @@ namespace StressCost.Patches
                     try { UpdateValorRank(card.gameObject); }
                     catch { }
 
-                UpdateTerrainDesc();
+                //try { UpdateTerrainDesc(); } catch { }
             }
         }
 

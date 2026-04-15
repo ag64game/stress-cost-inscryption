@@ -1,0 +1,14 @@
+{
+  "name": "Arachno",
+  "modPrefix": "Stress",
+  "displayedName": "Arachno",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 2,
+  "baseHealth": 2,
+  "abilities": [ "Deathtouch" ],
+  "pixelTexture":"pixel_arachno.png",
+  "extensionProperties": {
+  "StressCost": "5"
+  }
+}

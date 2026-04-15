@@ -1,0 +1,13 @@
+{
+  "name": "Obeso",
+  "modPrefix": "Stress",
+  "displayedName": "Obeso",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 2,
+  "baseHealth": 5,
+  "pixelTexture":"pixel_obeso.png",
+  "extensionProperties": {
+  "StressCost": "6"
+  }
+}

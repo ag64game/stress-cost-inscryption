@@ -1,0 +1,15 @@
+{
+  "name": "ResilientKnight",
+  "modPrefix": "Valor",
+  "displayedName": "Resilient Knight",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 2,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_resilientknight.png",
+  "abilities": [ "StressSigils.Ironclad" ],
+  "extensionProperties": {
+  "ValorCost": "3",
+  "ValorRank": "1"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "BlackHole",
+  "modPrefix": "Space",
+  "displayedName": "Black Hole",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Tech",
+  "baseAttack": 2,
+  "baseHealth": 1,
+  "abilities": ["Sentry", "Deathtouch"],
+  "pixelTexture":"pixel_blackhole.png",
+  "extensionProperties": {
+  "StardustCost": "5"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

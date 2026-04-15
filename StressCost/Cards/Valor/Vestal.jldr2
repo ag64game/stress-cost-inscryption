@@ -1,0 +1,14 @@
+{
+  "name": "Vestal",
+  "modPrefix": "Valor",
+  "displayedName": "Vestal",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 0,
+  "baseHealth": 1,
+  "pixelTexture":"pixel_vestal.png",
+  "abilities": [ "StressSigils.Healing Aura" ],
+  "extensionProperties": {
+  "ValorCost": "1"
+  }
+}

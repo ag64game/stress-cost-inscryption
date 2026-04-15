@@ -1,0 +1,12 @@
+{
+  "name": "Pylon",
+  "modPrefix": "Alchemy",
+  "displayedName": "Pylon",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "pixelTexture":"pixel_pylon.png",
+  "traits":["Terrain"],
+  "baseAttack": 0,
+  "baseHealth": 1,
+  "abilities": [ "StressSigils.Eldritch Power" ]
+}

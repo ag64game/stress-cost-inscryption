@@ -1,0 +1,14 @@
+{
+  "name": "Blunderbuss",
+  "modPrefix": "Valor",
+  "displayedName": "Blunderbuss",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 2,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_blunderbuss.png",
+  "abilities": [ "StressSigils.First Strike" ],
+  "extensionProperties": {
+  "ValorCost": "3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "TimeMachine",
+  "modPrefix": "Space",
+  "displayedName": "Time Machine",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_timemachine.png",
+  "abilities": [ "StressSigils.Rentrance" ],
+  "extensionProperties": {
+  "StardustCost": "4"
+  }
+}

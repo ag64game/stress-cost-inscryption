@@ -1,0 +1,16 @@
+{
+  "name": "Brainhound",
+  "modPrefix": "Alchemy",
+  "displayedName": "Brainhound",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 2,
+  "baseHealth": 3,
+  "abilities": [ "GuardDog" ],
+  "pixelTexture":"pixel_brainhound.png",
+  "extensionProperties": {
+  "FleshCost": "2",
+  "MetalCost": "2",
+  "ElixirCost": "1"
+  }
+}

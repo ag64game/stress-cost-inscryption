@@ -1,0 +1,11 @@
+{
+  "name": "SapiensUltima",
+  "modPrefix": "Alchemy",
+  "displayedName": "Sapiens Ultima",
+  "temple": "Nature",
+  "baseAttack": 4,
+  "baseHealth": 4,
+  "pixelTexture":"pixel_sapiensultima.png",
+  "abilities": [ "DoubleStrike" ],
+  "appearanceBehaviour": ["RareCardBackground"]
+}

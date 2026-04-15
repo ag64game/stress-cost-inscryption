@@ -1,0 +1,14 @@
+{
+  "name": "Zeppeloid",
+  "modPrefix": "Alchemy",
+  "displayedName": "Zeppeloid",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 1,
+  "baseHealth": 1,
+  "pixelTexture":"pixel_zeppeloid.png",
+  "abilities": [ "Flying" ],
+  "extensionProperties": {
+  "MetalCost": "1"
+  }
+}

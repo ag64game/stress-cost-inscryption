@@ -1,0 +1,15 @@
+{
+  "name": "Claustro",
+  "modPrefix": "Stress",
+  "displayedName": "Claustro",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 1,
+  "baseHealth": 4,
+  "traits":["Terrain"],
+  "abilities": ["Reach", "WhackAMole"],
+  "pixelTexture":"pixel_clustro.png",
+  "extensionProperties": {
+  "StressCost": "4"
+  }
+}

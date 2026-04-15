@@ -1,0 +1,15 @@
+{
+  "name": "Bacterio",
+  "modPrefix": "Stress",
+  "displayedName": "Bacterio",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Undead",
+  "baseAttack": 1,
+  "baseHealth": 1,
+  "abilities": ["SplitStrike", "Deathtouch"],
+  "pixelTexture":"pixel_bacterio.png",
+  "extensionProperties": {
+  "StressCost": "5"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Micro",
+  "modPrefix": "Stress",
+  "displayedName": "Micro",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 1,
+  "baseHealth": 1,
+  "abilities": [ "Submerge" ],
+  "pixelTexture":"pixel_micro.png",
+  "extensionProperties": {
+  "StressCost": "2"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Railgun",
+  "modPrefix": "Space",
+  "displayedName": "Railgun",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Tech",
+  "baseAttack": 6,
+  "baseHealth": 1,
+  "pixelTexture":"pixel_railgun.png",
+  "extensionProperties": {
+  "StardustCost": "8"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}

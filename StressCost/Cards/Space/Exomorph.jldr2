@@ -1,0 +1,13 @@
+{
+  "name": "Exomorph",
+  "modPrefix": "Space",
+  "displayedName": "Exomorph",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 3,
+  "baseHealth": 3,
+  "pixelTexture":"pixel_exomorph.png",
+  "extensionProperties": {
+  "StardustCost": "5"
+  }
+}

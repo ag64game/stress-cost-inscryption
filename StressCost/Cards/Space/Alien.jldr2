@@ -1,0 +1,13 @@
+{
+  "name": "Alien",
+  "modPrefix": "Space",
+  "displayedName": "Alien",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Tech",
+  "baseAttack": 1,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_alien.png",
+  "extensionProperties": {
+  "StardustCost": "2"
+  }
+}

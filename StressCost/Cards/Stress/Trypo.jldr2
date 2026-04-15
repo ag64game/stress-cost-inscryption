@@ -1,0 +1,14 @@
+{
+  "name": "Trypo",
+  "modPrefix": "Stress",
+  "displayedName": "Trypo",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 1,
+  "baseHealth": 1,
+  "abilities": [ "DrawCopy" ],
+  "pixelTexture":"pixel_trypo.png",
+  "extensionProperties": {
+  "StressCost": "3"
+  }
+}

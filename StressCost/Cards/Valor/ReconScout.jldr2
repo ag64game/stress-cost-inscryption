@@ -1,0 +1,15 @@
+{
+  "name": "ReconScout",
+  "modPrefix": "Valor",
+  "displayedName": "Recon Scout",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 1,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_reconscout.png",
+  "abilities": [ "StressSigils.Watchman" ],
+  "extensionProperties": {
+  "ValorCost": "2",
+  "ValorRank": "1"
+  }
+}

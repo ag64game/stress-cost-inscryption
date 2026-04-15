@@ -1,0 +1,13 @@
+{
+  "name": "Viking",
+  "modPrefix": "Valor",
+  "displayedName": "Viking",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 3,
+  "baseHealth": 5,
+  "pixelTexture":"pixel_viking.png",
+  "extensionProperties": {
+  "ValorCost": "5"
+  }
+}

@@ -139,6 +139,7 @@ namespace StressCost.Patches
         [HarmonyPostfix]
         public static IEnumerator SetPackImage(IEnumerator enumerator, PackOpeningUI __instance, CardTemple packType)
         {
+            openPack = true;
             packImg = __instance.mainPack;
             packCards = __instance.cards;
             packRippedLeft = __instance.packLeftRipped;
@@ -146,8 +147,6 @@ namespace StressCost.Patches
             PixelSelectableCard[] presetPre = new PixelSelectableCard[5];
             packCards.CopyTo(presetPre, 0);
             preset = presetPre.ToList();
-
-            openPack = true;
             yield return enumerator;
         }
 

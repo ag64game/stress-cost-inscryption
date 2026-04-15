@@ -1,0 +1,14 @@
+{
+  "name": "Flagbearer",
+  "modPrefix": "Valor",
+  "displayedName": "Flagbearer",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_flagbearer.png",
+  "abilities": [ "StressSigils.Frontliner" ],
+  "extensionProperties": {
+  "ValorCost": "1"
+  }
+}

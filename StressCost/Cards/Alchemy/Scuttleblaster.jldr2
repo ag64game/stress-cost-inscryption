@@ -1,0 +1,15 @@
+{
+  "name": "Scuttleblaster",
+  "modPrefix": "Alchemy",
+  "displayedName": "Scuttleblaster",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Nature",
+  "baseAttack": 0,
+  "baseHealth": 2,
+  "abilities": ["ExplodeOnDeath"],
+  "pixelTexture":"pixel_scuttleblaster.png",
+  "extensionProperties": {
+  "MetalCost": "1",
+  "ElixirCost": "1"
+  }
+}

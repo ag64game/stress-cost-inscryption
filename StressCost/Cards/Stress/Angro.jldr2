@@ -1,0 +1,14 @@
+{
+  "name": "Angro",
+  "modPrefix": "Stress",
+  "displayedName": "Angro",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 0,
+  "baseHealth": 1,
+  "abilities": [ "StressSigils.Enrage" ],
+  "pixelTexture":"pixel_angro.png",
+  "extensionProperties": {
+  "StressCost": "3"
+  }
+}

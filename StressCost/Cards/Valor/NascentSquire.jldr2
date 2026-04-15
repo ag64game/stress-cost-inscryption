@@ -1,0 +1,12 @@
+{
+  "name": "NascentSquire",
+  "modPrefix": "Valor",
+  "displayedName": "Nascent Squire",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Wizard",
+  "baseAttack": 0,
+  "baseHealth": 1,
+  "abilities": [ "Evolve" ],
+  "pixelTexture":"pixel_nascentsquire.png",
+  "evolveIntoName": "Valor_InfantryKnight"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Ommeta",
+  "modPrefix": "Stress",
+  "displayedName": "Ommeta",
+  "metaCategories": [ "GBCPlayable", "GBCPack" ],
+  "temple": "Undead",
+  "baseAttack": 3,
+  "baseHealth": 3,
+  "abilities": [ "AllStrike" ],
+  "pixelTexture":"pixel_ommenta.png",
+  "extensionProperties": {
+  "StressCost": "7"
+  }
+}

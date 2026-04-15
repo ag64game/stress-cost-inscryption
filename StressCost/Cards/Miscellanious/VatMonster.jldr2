@@ -1,0 +1,12 @@
+{
+  "name": "VatMonster",
+  "modPrefix": "Alchemy",
+  "displayedName": "Vat Monster",
+  "temple": "Nature",
+  "baseAttack": 2,
+  "baseHealth": 2,
+  "pixelTexture":"pixel_vatmonster.png",
+  "abilities": [ "DoubleStrike" ],
+  "evolveIntoName":"Alchemy_VatAbomination",
+  "appearanceBehaviour": ["RareCardBackground"]
+}

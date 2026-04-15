@@ -1,0 +1,16 @@
+{
+  "name": "ChivaliereDeon",
+  "modPrefix": "Valor",
+  "displayedName": "Chivaliere D'eon",
+  "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
+  "temple": "Wizard",
+  "baseAttack": 2,
+  "baseHealth": 1,
+  "pixelTexture":"pixel_chivalieredeon.png",
+  "abilities": ["Strafe", "StressSigils.Afterimage" ],
+  "extensionProperties": {
+  "ValorCost": "3",
+  "ValorRank": "2"
+  },
+  "appearanceBehaviour": ["RareCardBackground"]
+}
