@@ -23,6 +23,7 @@ namespace StressCost.Sigils
         public override System.Collections.IEnumerator Activate()
         {
             yield return PreSuccessfulTriggerSequence();
+            Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Locked;
 
             var board = Singleton<BoardManager>.Instance;
 
@@ -32,6 +33,7 @@ namespace StressCost.Sigils
 
             try { yield return TimeTravel(selected); } finally { }
 
+            Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Unlocked;
             yield return LearnAbility(0.2f);
             yield break;
         }
@@ -44,7 +46,7 @@ namespace StressCost.Sigils
         private void EntranceFailed(CardSlot slot)
         {
             Card.Anim.StrongNegationEffect();
-            slot.PlaySound();
+            AudioController.Instance.PlaySound2D("toneless_negate", volume: 0.65f);
         }
 
         private void CursorEnteredSlot(CardSlot slot)

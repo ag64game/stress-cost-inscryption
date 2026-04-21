@@ -19,7 +19,6 @@ namespace StressCost.Sigils
 
         public override IEnumerator OnResolveOnBoard()
         {
-            yield return PreSuccessfulTriggerSequence();
             List<CardSlot> slots = new List<CardSlot>();
             if (base.Card.OpponentCard) slots = Singleton<BoardManager>.Instance.opponentSlots; else slots = Singleton<BoardManager>.Instance.playerSlots;
 
@@ -31,6 +30,7 @@ namespace StressCost.Sigils
 
             if (slots.Count > 0)
             {
+                yield return PreSuccessfulTriggerSequence();
                 yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName} absorbs the mana of the crystals!", (GBC.TextBox.Style)Card.Info.temple);
 
                 foreach (CardSlot gemSlot in slots)
@@ -39,7 +39,7 @@ namespace StressCost.Sigils
                     yield return new WaitForSeconds(0.175f);
 
                     gemSlot.Card.AddTemporaryMod(new CardModificationInfo(0, -999));
-                    yield return gemSlot.Card.Die(false);
+                    yield return gemSlot.Card.Die(false, Card);
 
                     
                     yield return new WaitForSeconds(0.015f);

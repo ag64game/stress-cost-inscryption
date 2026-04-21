@@ -34,6 +34,20 @@ namespace StressCost.Cost
             }
         }
 
+        public static IEnumerator IncrementCounter(int amount)
+        {
+            float time = 0.2f / amount;
+
+            for (int i = 0; i < amount; i++)
+            {
+                stressCounter++;
+
+                AudioController.Instance.PlaySound2D("plainBlip6", volume: 0.6f);
+                yield return new WaitForSeconds(time);
+                time += 0.025f;
+            }
+        }
+
         private static int secondPlayer = 0;
 
         public override string CostName => "StressCost";
@@ -66,6 +80,27 @@ namespace StressCost.Cost
             if (baseVal == null) baseVal = 0;
 
             return baseVal.Value;
+        }
+    }
+
+    public class UIShake : MonoBehaviour
+    {
+        public IEnumerator Shake(float duration, float magnitude)
+        {
+            Vector3 originalPos = transform.localPosition;
+            float elapsed = 0.0f;
+
+            while (elapsed < duration)
+            {
+                float movePercent = 1 - (elapsed / duration);
+                float x = UnityEngine.Random.Range(-movePercent, movePercent) * magnitude;
+                float y = UnityEngine.Random.Range(-movePercent, movePercent) * magnitude;
+
+                transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+            transform.localPosition = originalPos;
         }
     }
 }

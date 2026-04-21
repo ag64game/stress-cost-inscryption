@@ -37,9 +37,11 @@ namespace StressCost.Sigils
         public override System.Collections.IEnumerator Activate()
         {
             yield return PreSuccessfulTriggerSequence();
+            Singleton<ViewManager>.Instance.Controller.SwitchToControlMode(Singleton<BoardManager>.Instance.ChoosingSlotViewMode, false);
+            Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Locked;
 
             available = BoardManager.Instance.AllSlots.Where(slot => slot.Card != null && !slot.Card.Info.HasTrait(Trait.Terrain) && !slot.Equals(Card.Slot)).ToList();
-            yield return BoardManager.Instance.ChooseTarget(BoardManager.Instance.AllSlots, available, ChosenTarget, ChooseFail, CursorEnteredSlot, () => false, CursorType.Target);
+            yield return BoardManager.Instance.ChooseTarget(BoardManager.Instance.AllSlots, available, ChosenTarget, ChooseFail, CursorEnteredSlot, () => selected == Card.slot, CursorType.Target);
 
             yield return Singleton<TextBox>.Instance.ShowUntilInput($"{selected.Card.Info.displayedName} underwent Pigification!", (GBC.TextBox.Style)Card.Info.temple);
             base.Card.Anim.PlayAttackAnimation(false, selected);
@@ -52,6 +54,8 @@ namespace StressCost.Sigils
                 yield return new WaitForSeconds(0.375f);
             }
 
+            Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Unlocked;
+            Singleton<ViewManager>.Instance.Controller.SwitchToControlMode(Singleton<BoardManager>.Instance.DefaultViewMode, false);
             yield return base.LearnAbility(0f);
 
             yield break;
@@ -64,6 +68,7 @@ namespace StressCost.Sigils
 
         private void ChooseFail(CardSlot slot)
         {
+            AudioController.Instance.PlaySound2D("toneless_negate", volume: 0.65f);
         }
 
         private void CursorEnteredSlot(CardSlot slot)

@@ -59,13 +59,14 @@ namespace StressCost.Patches
         [HarmonyPostfix]
         public static IEnumerator PayCosts(IEnumerator enumerator, BoardManager __instance, PlayableCard card, CardSlot slot)
         {
+            yield return enumerator;
             if (slot.IsPlayerSlot)
             {
                 if (!dontPay)
                 {
                     if (card.Info.GetExtendedPropertyAsInt("StressCost") > 0 && (CostmaniaPlugin.config3DStress.Value || SaveManager.SaveFile.IsPart2))
                     {
-                        Cost.StressCost.stressCounter += card.Info.GetExtendedPropertyAsInt("StressCost").Value;
+                        yield return Cost.StressCost.IncrementCounter(card.Info.StressCost());
                         if (enumerator != null) foreach (CardSlot fearSlot in __instance.AllSlots.FindAll(slot => slot.Card != null && slot.Card.Info.abilities.Count != 0)) yield return Patches.AbilityPatches.OnStressCounterChange(fearSlot.Card, enumerator);
                     }
 
@@ -79,8 +80,6 @@ namespace StressCost.Patches
 
                 if (CostmaniaPlugin.config3DStardust.Value || SaveManager.SaveFile.IsPart2) StardustCost.stardustCounter++;
             }
-
-            yield return enumerator;
         }
 
         [HarmonyPatch(typeof(TurnManager), nameof(TurnManager.DoCombatPhase))]
@@ -97,7 +96,12 @@ namespace StressCost.Patches
                         {
                             int damage = Convert.ToInt32(Mathf.Floor(Cost.StressCost.stressCounter / 2f));
 
-                            if (damage > 0) yield return Singleton<LifeManager>.Instance.ShowDamageSequence(damage, damage, true, 0.3f, null, 0.15f, true);
+                            if (damage > 0)
+                            {
+                                yield return CostGraphicPatches.stressCounterShaker.Shake(0.3f, 0.02f);
+                                yield return new WaitForSeconds(0.07f);
+                                yield return Singleton<LifeManager>.Instance.ShowDamageSequence(damage, damage, true, 0.2f, null, 0.15f, true);
+                            }
 
                             if (Cost.StressCost.stressCounter < 2) Cost.StressCost.stressCounter = 0; else Cost.StressCost.stressCounter -= 2;
                         }
@@ -135,6 +139,7 @@ namespace StressCost.Patches
             private static void PromotionSuccess(CardSlot slot)
             {
                 slot.Card.AddValorRank();
+                AudioController.Instance.PlaySound2D("plainBlip2", volume: 0.65f);
             }
 
             private static void PromotionFailed(CardSlot slot)
@@ -142,7 +147,7 @@ namespace StressCost.Patches
                 if (slot.Card != null && slot.Card.Info.HasTrait(Trait.Terrain))
                 {
                     slot.Card.Anim.StrongNegationEffect();
-                    slot.PlaySound();
+                    AudioController.Instance.PlaySound2D("toneless_negate", volume: 0.65f);
                 }
             }
 

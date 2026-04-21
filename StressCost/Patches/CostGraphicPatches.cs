@@ -50,6 +50,8 @@ namespace StressCost.Patches
         public static PixelNumeral disStardustCounter;
         public static AlchemyCounter disAlchemyCounter;
 
+        public static UIShake stressCounterShaker;
+
         public static void Update()
         {
             if (SaveManager.SaveFile.IsPart2)
@@ -57,8 +59,6 @@ namespace StressCost.Patches
                 foreach (GameObject card in Array.FindAll(CostmaniaPlugin.FindObjectsOfType<GameObject>(), obj => obj.name.Contains("Card (")))
                     try { UpdateValorRank(card.gameObject); }
                     catch { }
-
-                //try { UpdateTerrainDesc(); } catch { }
             }
         }
 
@@ -116,8 +116,8 @@ namespace StressCost.Patches
                     if (baseVal > 0) stat.SetText(Convert.ToString(baseVal));
                     else stat.SetText("");
 
-                    stat.SetSortingOrder((__instance.gameObject.FindChild("Base").FindChild("PixelSnap").GetComponent<SpriteRenderer>().sortingOrder) * 10);
-                    //rankText.GetComponent<SpriteRenderer>().sortingOrder = attack.GetComponent<SpriteRenderer>().sortingOrder;
+                    if (Singleton<BoardManager>.Instance != null)
+                        stat.SetSortingOrder((__instance.gameObject.FindChild("Base").FindChild("PixelSnap").GetComponent<SpriteRenderer>().sortingOrder) * 10);
                 }
             }
         }
@@ -178,6 +178,8 @@ namespace StressCost.Patches
                 disStressCounter = numsBorder.GetComponent<PixelNumeral>();
                 if(!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("julianperge.inscryption.act2.increaseCardSlots")) numsBorder.transform.position = new Vector3(-2.08f, 0.94f, 0);
                 else numsBorder.transform.position = new Vector3(-1.44f, 1.132f, 0);
+
+                stressCounterShaker = stressDis.AddComponent<UIShake>();
             }
             catch (Exception e)
             {

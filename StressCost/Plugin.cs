@@ -85,6 +85,7 @@ namespace StressCost
 
             Patches.PackPatches.SetupStarterDecks();
             Patches.AbilityPatches.SetStackableAbilities();
+            Patches.CollectionUIPatches.InitRareRecals();
 
 
             config3DAlchemy = base.Config.Bind<bool>("Alchemy in 3D", "Active", false, "Whether Alchemy dies should be rolled in the 3D acts, won't display them though");
@@ -165,6 +166,7 @@ namespace StressCost
             AbilGloryKill.AddGloryKill();
             AbilImpart.AddImpart();
             AbilProductionLine.AddProductionLine();
+            AbilGestationTank.AddGestationTank();
 
             VariablestatMightierPen.AddMightierPen();
             VariablestatDeathToll.AddDeathToll();

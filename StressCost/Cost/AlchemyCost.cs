@@ -8,6 +8,7 @@ using InscryptionAPI.Helpers;
 using InscryptionCommunityPatch.Card;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Bson;
+using Pixelplacement.TweenSystem;
 using Sirenix.Serialization.Utilities;
 using StressCost.Patches;
 using System;
@@ -116,6 +117,7 @@ namespace StressCost.Cost
             if (value != AlchemyValue.Empty)
             {
                 if (!locked) AlchemyCounter.GetLastClickedDiceId(this);
+                AudioController.Instance.PlaySound2D("crunch_short#2", volume:0.25f);
                 locked = !locked;
             }
         }
@@ -232,6 +234,7 @@ namespace StressCost.Cost
         {
             if (index != null) RollDice(index.Value, specific);
             else for(int i = 0; i < awakeCount; i++) RollDice(i, specific);
+            AudioController.Instance.PlaySound2D("crunch_short#1", volume: 0.65f);
         }
 
         private static void RollDice(int index, AlchemyValue? specific = null)
@@ -264,6 +267,7 @@ namespace StressCost.Cost
             }
 
             DepleteDies(type, amount);
+            AudioController.Instance.PlaySound2D("crunch_short#1", volume: 0.4f);
             return true;
         }
 
@@ -283,6 +287,7 @@ namespace StressCost.Cost
                     amount--;
                     i--;
                 }
+                
             }
         }
 

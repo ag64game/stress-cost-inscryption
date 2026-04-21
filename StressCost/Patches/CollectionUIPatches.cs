@@ -45,40 +45,43 @@ namespace StressCost.Patches
 {
     internal class CollectionUIPatches
     {
+        public static Sprite rareDecalStress, rareDecalValor, rareDecalAlchemy, rareDecalSpace;
+        public static void InitRareRecals()
+        {
+            Texture2D textureStress = TextureHelper.GetImageAsTexture($"pixel_rare_frame_stress.png", typeof(CostmaniaPlugin).Assembly);
+            rareDecalStress = Sprite.Create(textureStress, new Rect(0, 0, textureStress.width, textureStress.height), new Vector2(0.5f, 0.5f));
+            
+            Texture2D textureValor = TextureHelper.GetImageAsTexture($"pixel_rare_frame_valor.png", typeof(CostmaniaPlugin).Assembly);
+            rareDecalValor = Sprite.Create(textureValor, new Rect(0, 0, textureValor.width, textureValor.height), new Vector2(0.5f, 0.5f));
+
+            Texture2D textureAlchemy = TextureHelper.GetImageAsTexture($"pixel_rare_frame_alchemy.png", typeof(CostmaniaPlugin).Assembly);
+            rareDecalAlchemy = Sprite.Create(textureAlchemy, new Rect(0, 0, textureAlchemy.width, textureAlchemy.height), new Vector2(0.5f, 0.5f));
+
+            Texture2D textureSpace = TextureHelper.GetImageAsTexture($"pixel_rare_frame_space.png", typeof(CostmaniaPlugin).Assembly);
+            rareDecalSpace = Sprite.Create(textureSpace, new Rect(0, 0, textureSpace.width, textureSpace.height), new Vector2(0.5f, 0.5f));
+        }
+
+
         [HarmonyPatch(typeof(Card), nameof(Card.RenderCard))]
         [HarmonyPostfix]
-        public static void AddRareDecals(Card __instance)
+        public static void InstateRareDecals(Card __instance)
         {
-            if (!BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("nevernamed.inscryption.noraredecals"))
+            if (SaveManager.SaveFile.IsPart2 && !BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("nevernamed.inscryption.noraredecals"))
             {
                 try
                 {
-                    Texture2D textureStress = TextureHelper.GetImageAsTexture($"pixel_rare_frame_stress.png", typeof(CostmaniaPlugin).Assembly);
-                    Sprite rareDecalStress = Sprite.Create(textureStress, new Rect(0, 0, textureStress.width, textureStress.height), new Vector2(0.5f, 0.487f));
-
-                    Texture2D textureValor = TextureHelper.GetImageAsTexture($"pixel_rare_frame_valor.png", typeof(CostmaniaPlugin).Assembly);
-                    Sprite rareDecalValor = Sprite.Create(textureValor, new Rect(0, 0, textureValor.width, textureValor.height), new Vector2(0.5f, 0.487f));
-
-                    Texture2D textureAlchemy = TextureHelper.GetImageAsTexture($"pixel_rare_frame_alchemy.png", typeof(CostmaniaPlugin).Assembly);
-                    Sprite rareDecalAlchemy = Sprite.Create(textureAlchemy, new Rect(0, 0, textureAlchemy.width, textureAlchemy.height), new Vector2(0.5f, 0.487f));
-
-                    Texture2D textureSpace = TextureHelper.GetImageAsTexture($"pixel_rare_frame_space.png", typeof(CostmaniaPlugin).Assembly);
-                    Sprite rareDecalSpace = Sprite.Create(textureSpace, new Rect(0, 0, textureSpace.width, textureSpace.height), new Vector2(0.5f, 0.487f));
-
                     SpriteRenderer decalRenderer = __instance.gameObject.FindChild("Base").FindChild("PixelSnap").FindChild("CardElements").FindChild("RareCardDetail").GetComponent<SpriteRenderer>();
 
                     if (__instance.Info.GetModPrefix() != null && __instance.Info.metaCategories.Contains(CardMetaCategory.Rare))
                     {
-                        if (__instance.Info.GetModPrefix().Contains("Stress")) decalRenderer.sprite = rareDecalStress;
-                        else if (__instance.Info.GetModPrefix().Contains("Valor")) decalRenderer.sprite = rareDecalValor;
-                        else if (__instance.Info.GetModPrefix().Contains("Alchemy")) decalRenderer.sprite = rareDecalAlchemy;
-                        else if (__instance.Info.GetModPrefix().Contains("Space")) decalRenderer.sprite = rareDecalSpace;
+                        if (__instance.Info.GetModPrefix().Contains("Stress") && rareDecalStress != null) decalRenderer.sprite = rareDecalStress;
+                        else if (__instance.Info.GetModPrefix().Contains("Valor") && rareDecalValor != null) decalRenderer.sprite = rareDecalValor;
+                        else if (__instance.Info.GetModPrefix().Contains("Alchemy") && rareDecalAlchemy != null) decalRenderer.sprite = rareDecalAlchemy;
+                        else if (__instance.Info.GetModPrefix().Contains("Space") && rareDecalSpace != null) decalRenderer.sprite = rareDecalSpace;
                     }
-
                 }
                 catch { }
             }
-
         }
 
         [HarmonyPatch(typeof(CollectionUI), nameof(CollectionUI.Start))]

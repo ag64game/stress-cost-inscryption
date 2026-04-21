@@ -1,19 +1,21 @@
 {
-  "name": "MysteriousVat1",
+  "name": "MysteriousVat",
   "modPrefix": "Alchemy",
   "displayedName": "Mysterious Vat",
   "metaCategories": [ "GBCPlayable", "GBCPack", "Rare" ],
   "temple": "Nature",
   "baseAttack": 0,
-  "baseHealth": 4,
+  "baseHealth": 2,
   "pixelTexture":"pixel_mysteriousvat.png",
-  "abilities": [ "IceCube", "Evolve" ],
-  "evolveIntoName": "Alchemy_MysteriousVat2",
-  "iceCubeName":"Alchemy_VatCreature",
+  "abilities": [ "StressSigils.Gestation Tank" ],
   "extensionProperties": {
   "FleshCost": "1",
   "MetalCost": "1",
-  "ElixirCost": "1"
+  "ElixirCost": "1",
+  "GestationTankName1": "Alchemy_VatCreature",
+  "GestationTankName2": "Alchemy_VatMonster",
+  "GestationTankName3": "Alchemy_VatAbomination",
+  "GestationTankName4": "Alchemy_SapiensUltima"
   },
   "appearanceBehaviour": ["RareCardBackground"]
 }
