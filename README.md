@@ -36,5 +36,6 @@
 <br />
 
 ## Technical
+>>>>>>> 0bddb64c8be62301657ee193847322df5c9ed820
 To create cards for the new Temples, add the name of their temple as seen above into their Mod GUID.
 For feedback or bug reports, please contact me on discord at [Aga Baga](https://discord.com/users/516979366077661205)
