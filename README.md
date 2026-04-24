@@ -20,7 +20,7 @@
 
 - Let loose in battle with Herilind's knights, archers and pirates. Created by [Herilind.](https://www.reddit.com/r/inscryption/comments/ul4sp5/inscryption_fanscrybe_cards_campaign_the_scrybe/)
 - These cards cost Valor. Each card now has a Valor Rank, and cards that cost Valor can be played when you control a card with equal or higher Rank.
-
+<br /><br />
 
 ##Features
 - The 4 custom temples, with 4 custom costs.
