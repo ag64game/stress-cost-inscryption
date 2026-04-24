@@ -22,12 +22,15 @@
 - These cards cost Valor. Each card now has a Valor Rank, and cards that cost Valor can be played when you control a card with equal or higher Rank.
 <br /><br />
 
-##Features
+## Features
 - The 4 custom temples, with 4 custom costs.
 - 96 brand new cards across all of the temples.
 - More than 30 new sigils utilised by said cards.
 - Harder encounters for every NPC utilising the brand new cards.
 - And a few extra jokes...
 
+<br />
+
+# Technical
 To create cards for the new Temples, add the name of their temple as seen above into their Mod GUID.
 For feedback or bug reports, please contact me on discord at [Aga Baga](https://discord.com/users/516979366077661205)
