@@ -11,7 +11,7 @@
 <img width="1279" height="150" alt="1777042725943" src="https://github.com/user-attachments/assets/7737f04d-5a6f-483e-9be9-40892d4f8b4f" />
 
 - Master the terrifying might of Phantomortis' horrid manifestations of phobias. Created by yours truly.
-- These cards cost Stress. When a Stress card is played, it adds it's cost into the Stress Counter, which in turn damages you directly.
+- These cards cost Stress. When a Stress card is played, it adds it's cost to the Stress Counter, which in turn damages you.
 <br />
 
 <img width="1242" height="108" alt="1777042753128" src="https://github.com/user-attachments/assets/f06490e4-1fad-4d9c-a326-23796071e012" />
@@ -31,10 +31,12 @@
 - 96 brand new cards across all of the temples.
 - More than 30 new sigils utilised by said cards.
 - Harder encounters for every NPC utilising the brand new cards.
+- Compatability with most other major Act 2 related mods out there.
 - And a few extra jokes...
 
 <br />
 
 ## Technical
-To create cards for the new Temples, add the name of their temple as seen above into their Mod GUID.
+To create cards for the new Temples, add the name of their temple as seen above into their Mod GUID.<br />
+For the record, there are some issues with Infinite Act 2 compatability: Cards spawn in og temples' packs instead of their own, and you can't use boons. But you can definately play this mod with Infact2.<br />
 For feedback or bug reports, please contact me on discord at [Aga Baga](https://discord.com/users/516979366077661205)
