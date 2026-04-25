@@ -255,5 +255,34 @@ namespace StressCost.Patches
                 Cost.StressCost.ResetPlayerTwo();
             }
         }
+
+        [HarmonyPatch(typeof(Part1RareChoiceGenerator), nameof(Part1RareChoiceGenerator.GenerateChoices))]
+        [HarmonyPostfix]
+        public static void NoAlchemyRaresPart1(ref Part1RareChoiceGenerator __instance, ref List<CardChoice> __result, ref CardChoicesNodeData data, ref int randomSeed)
+        {
+            if (!CostmaniaPlugin.config3DAlchemy.Value)
+            {
+                List<CardChoice> newChoices = __result;
+                var viableRares = CardManager.BaseGameCards.Where(card => card.metaCategories.Contains(CardMetaCategory.Rare) &&
+                !card.metaCategories.Contains(CardMetaCategory.AscensionUnlock) && card.temple == CardTemple.Nature
+                && (card.GetModPrefix() == null || !card.GetModPrefix().Contains("Alchemy")) && card.name != "Hrokkall" && card.name != "Kraken"
+                && card.name != "Hydra").ToList();
+
+
+                if (Singleton<ActiveIfAscensionMode>.Instance.activeIfConditionMet) viableRares.AddRange(CardManager.BaseGameCards.Where(card =>
+                card.metaCategories.Contains(CardMetaCategory.Rare) && card.metaCategories.Contains(CardMetaCategory.AscensionUnlock) && card.temple == CardTemple.Nature
+                && (card.GetModPrefix() == null || !card.GetModPrefix().Contains("Alchemy")) && card.name != "Ijiraq_UnlockScreen" && card.name != "CuriousEgg"));
+
+                for (int i = 0; i < 3; i++)
+                {
+                    CardInfo chosen = viableRares[UnityEngine.Random.Range(0, viableRares.Count)];
+                    newChoices[i].CardInfo = chosen;
+
+                    viableRares.Remove(chosen);
+                }
+
+                __result = newChoices;
+            }
+        }
     }
 }
