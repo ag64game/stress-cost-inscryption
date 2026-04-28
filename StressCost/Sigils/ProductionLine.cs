@@ -6,11 +6,12 @@ using InscryptionAPI.Helpers.Extensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 namespace StressCost.Sigils
 {
-    public class AbilProductionLine : AbilityBehaviour
+    public class AbilProductionLine : Strafe
     {
         public static Ability ability;
         public override Ability Ability => ability;
@@ -29,32 +30,15 @@ namespace StressCost.Sigils
             "Alchemy_GreaterHomonculus"
         };
 
-        public override bool RespondsToTurnEnd(bool playerTurnEnd)
+        public override IEnumerator PostSuccessfulMoveSequence(CardSlot oldSlot)
         {
-            return playerTurnEnd && 
-                (Singleton<BoardManager>.Instance.GetAdjacent(base.Card.Slot, true).Card == null || Singleton<BoardManager>.Instance.GetAdjacent(base.Card.Slot, false).Card == null);
-        }
-
-        public override IEnumerator OnTurnEnd(bool playerTurnEnd)
-        {
-            CardSlot old = Card.Slot;
-            yield return base.PreSuccessfulTriggerSequence();
-            
-            CardSlot left = Singleton<BoardManager>.Instance.GetAdjacent(base.Card.Slot, true);
-            CardSlot right = Singleton<BoardManager>.Instance.GetAdjacent(base.Card.Slot, false);
-
-            if (right.Card == null) yield return DoMovement(right, false);
-            else if (left.Card == null) yield return DoMovement(left, true);
-
             yield return Singleton<TextBox>.Instance.ShowUntilInput($"{Card.Info.displayedName}'s pipeline triggers", (GBC.TextBox.Style)Card.Info.temple);
-            yield return old.CreateCardInSlot(CardLoader.GetCardByName(cards[UnityEngine.Random.Range(0, cards.Length)]));
-
-            yield return base.LearnAbility(0.1f);
+            yield return oldSlot.CreateCardInSlot(CardLoader.GetCardByName(cards[UnityEngine.Random.Range(0, cards.Length)]));
         }
 
         private IEnumerator DoMovement(CardSlot destination, bool isLeft)
         {
-            base.Card.RenderInfo.flippedPortrait = (isLeft && base.Card.Info.flipPortraitForStrafe);
+            base.Card.RenderInfo.flippedPortrait = isLeft;
             base.Card.RenderCard();
 
             yield return Singleton<BoardManager>.Instance.AssignCardToSlot(base.Card, destination, 0.1f, null, true);

@@ -199,8 +199,11 @@ namespace StressCost.Patches
         [HarmonyPostfix, HarmonyPatch(typeof(TurnManager), nameof(TurnManager.DoUpkeepPhase))]
         public static IEnumerator ResetStardust(IEnumerator enumerator, TurnManager __instance, bool playerUpkeep)
         {
-            if(Singleton<BoardManager>.Instance.GetPlayerCards().Any(card => card.HasAbility(AbilDataBanks.ability))) StardustCost.stardustCounter -= 2;
-            else StardustCost.stardustCounter = 0;
+            if (playerUpkeep)
+            {
+                if (Singleton<BoardManager>.Instance.GetPlayerCards().Any(card => card.HasAbility(AbilDataBanks.ability))) StardustCost.stardustCounter -= 2;
+                else StardustCost.stardustCounter = 0;
+            }
             yield return enumerator;
         }
 

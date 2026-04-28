@@ -18,7 +18,7 @@ namespace StressCost.Sigils
 
         public override IEnumerator OnUpkeep(bool playerUpkeep)
         {
-            Cost.StardustCost.stardustCounter++;
+            Cost.StardustCost.stardustCounter+=2;
             yield return LearnAbility(0.2f);
             yield return true;
         }
@@ -27,7 +27,7 @@ namespace StressCost.Sigils
         {
             AbilityInfo info = AbilityManager.New("StressSigils",
                 "Starbringer",
-                "While [creature] is on the board, it's owner starts every turn with an extra Stardust.",
+                "While [creature] is on the board, it's owner starts every turn with 2 extra Stardust.",
                 typeof(AbilStarbringer),
                 "3d_starbringer.png");
 
